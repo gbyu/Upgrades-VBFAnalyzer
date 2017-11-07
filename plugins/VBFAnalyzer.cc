@@ -134,6 +134,10 @@ VBFAnalyzer::~VBFAnalyzer()
 void
 VBFAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
+   
+  gen_.clearTreeVectors();
+  ak4jets_.clearTreeVectors();
+  ak8jets_.clearTreeVectors();
 
   edm::Handle<std::vector<reco::GenParticle>> h_genpar;
   iEvent.getByToken(genparToken_, h_genpar);

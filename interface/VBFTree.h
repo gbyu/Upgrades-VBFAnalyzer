@@ -68,6 +68,40 @@ class VBFGenParticleInfoBranches {
     std::vector<double> dau1mass ; 
     std::vector<int>    dau1status ; 
 
+    void clearTreeVectors() {
+      genpid     .clear() ;
+      genpt      .clear() ; 
+      geneta     .clear() ; 
+      genphi     .clear() ; 
+      genmass    .clear() ; 
+      gencharge  .clear() ; 
+      genstatus  .clear() ; 
+      mom0pid    .clear() ; 
+      mom0pt     .clear() ;  
+      mom0eta    .clear() ; 
+      mom0phi    .clear() ; 
+      mom0mass   .clear() ; 
+      mom0status .clear() ; 
+      mom1pid    .clear() ; 
+      mom1pt     .clear() ; 
+      mom1eta    .clear() ; 
+      mom1phi    .clear() ; 
+      mom1mass   .clear() ; 
+      mom1status .clear() ; 
+      dau0pid    .clear() ; 
+      dau0pt     .clear() ; 
+      dau0eta    .clear() ; 
+      dau0phi    .clear() ; 
+      dau0mass   .clear() ; 
+      dau0status .clear() ; 
+      dau1pid    .clear() ; 
+      dau1pt     .clear() ; 
+      dau1eta    .clear() ; 
+      dau1phi    .clear() ; 
+      dau1mass   .clear() ; 
+      dau1status .clear() ; 
+    }
+
     void RegisterTree(TTree* tree, std::string name="GenPartInfo") {
       tree->Branch((name+"_genpid"    ).c_str(), &genpid    ) ; 
       tree->Branch((name+"_genpt"     ).c_str(), &genpt     ) ; 
@@ -141,6 +175,48 @@ class VBFJetInfoBranches {
     std::vector<double> sj1eta;
     std::vector<double> sj0phi;
     std::vector<double> sj1phi;
+
+    void clearTreeVectors() {
+      idx               .clear() ;     
+      genjetpt          .clear() ;    
+      pt                .clear() ;    
+      eta               .clear() ;    
+      phi               .clear() ;    
+      energy            .clear() ;    
+      mass              .clear() ;    
+      ptCHS             .clear() ;    
+      etaCHS            .clear() ;    
+      phiCHS            .clear() ;    
+      massCHS           .clear() ;    
+      softDropMassCHS   .clear() ;    
+      prunedMassCHS     .clear() ;    
+      tau1CHS           .clear() ;    
+      tau2CHS           .clear() ;    
+      tau3CHS           .clear() ;    
+      softDropMassPuppi .clear() ;    
+      tau1Puppi         .clear() ;    
+      tau2Puppi         .clear() ;    
+      tau3Puppi         .clear() ;    
+      csvv2             .clear() ;    
+      deepcsv           .clear() ;    
+      pujetid           .clear() ;    
+      partonFlavour     .clear() ;     
+      hadronFlavour     .clear() ;     
+      sj0csvv2          .clear() ;    
+      sj1csvv2          .clear() ;    
+      sj0deepcsv        .clear() ;    
+      sj1deepcsv        .clear() ;    
+      sj0partonFlavour  .clear() ;     
+      sj1partonFlavour  .clear() ;     
+      sj0hadronFlavour  .clear() ;     
+      sj1hadronFlavour  .clear() ;     
+      sj0pt             .clear() ;    
+      sj1pt             .clear() ;    
+      sj0eta            .clear() ;    
+      sj1eta            .clear() ;    
+      sj0phi            .clear() ;    
+      sj1phi            .clear() ;    
+    }
 
     void RegisterTree(TTree* tree, std::string name="JetInfo") {
       tree->Branch((name+"_idx").c_str(), &idx); 
