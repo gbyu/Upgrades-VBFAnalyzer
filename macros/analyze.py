@@ -38,6 +38,8 @@ fout.cd()
 h2_ak8pt_ak8eta              = ROOT.TH2D("h2_ak8pt_ak8eta"              ,";p_{T} (AK8) [GeV]; #eta (AK8);;", 150, 0., 3000, 50, -5, 5)
 h2_ak8pt_ak8eta_htagged      = ROOT.TH2D("h2_ak8pt_ak8eta_htagged"      ,";p_{T} (AK8) [GeV]; #eta (AK8);;", 150, 0., 3000, 50, -5, 5)
 
+h2_sjpt_sjeta		     = ROOT.TH2D("h2_sjpt_sjeta"                ,";p_{T} (SubJet) [GeV]; #eta (SubJet);;", 100, 0., 1000, 50, -5, 5) 
+h2_sjpt_sjeta_btagged        = ROOT.TH2D("h2_sjpt_sjeta_btagged"        ,";p_{T} (SubJet) [GeV]; #eta (SubJet);;", 100, 0., 1000, 50, -5, 5)
 h2_ak4pt_ak4eta              = ROOT.TH2D("h2_ak4pt_ak4eta"              ,";p_{T} (AK4) [GeV]; #eta (AK4);;", 150, 0., 3000, 50, -5, 5)
 h2_ak4pt_ak4genjetpt         = ROOT.TH2D("h2_ak4pt_ak4genjetpt"         ,";p_{T} (AK4 jets) [GeV]; p_{T} (AK4 genjets) [GeV];Events;" ,300,0.,3000,300,0.,3000)
 
@@ -125,6 +127,8 @@ for fname in fnames:
 
     sj0_pts         = event.AK8JetsPuppi_sj0pt
     sj1_pts         = event.AK8JetsPuppi_sj1pt
+    sj0_etas        = event.AK8JetsPuppi_sj0eta
+    sj1_etas        = event.AK8JetsPuppi_sj1eta
     csvv2_sj0s      = event.AK8JetsPuppi_sj0csvv2
     csvv2_sj1s      = event.AK8JetsPuppi_sj1csvv2
     deepcsv_sj0s    = event.AK8JetsPuppi_sj0deepcsv
@@ -150,20 +154,20 @@ for fname in fnames:
     ### Higgs jet sel:
 
     ptsel      = pts[0] > 300 and pts[1] > 300
-    etasel     = abs(etas[0]) < 3 and abs(etas[1]) < 3 
+    etasel     = abs(etas[0]) < 3.0 and abs(etas[1]) < 3.0 
     detasel    = abs(etas[0] - etas[1]) < 1.0
     tau21sel   = tau2s[0]/tau1s[0] < 0.6 and tau2s[1]/tau1s[1] < 0.6
     msdsel     = 80 < sd_masses[0] < 160 and 60 < sd_masses[1] < 140
 
-    sjbtag_1 = deepcsv_sj0s[0] > deepcsvl or deepcsv_sj1s[0] > deepcsvl  or deepcsv_sj0s[1] > deepcsvl or deepcsv_sj1s[1] > deepcsvl
-    sjbtag_2 = (deepcsv_sj0s[0] > deepcsvl or deepcsv_sj1s[0] > deepcsvl) and (deepcsv_sj0s[1] > deepcsvl or deepcsv_sj1s[1] > deepcsvl) 
-    sjbtag_3 = ( (deepcsv_sj0s[0] > deepcsvl and deepcsv_sj1s[0] > deepcsvl) and (deepcsv_sj0s[1] > deepcsvl or deepcsv_sj1s[1] > deepcsvl) ) or\
-        ( (deepcsv_sj0s[0] > deepcsvl or deepcsv_sj1s[0] > deepcsvl) and (deepcsv_sj0s[1] > deepcsvl and deepcsv_sj1s[1] > deepcsvl) )
-    sjbtag_4 = deepcsv_sj0s[0] > deepcsvl and deepcsv_sj1s[0] > deepcsvl  and deepcsv_sj0s[1] > deepcsvl and deepcsv_sj1s[1] > deepcsvl 
+    sjbtag_1 = deepcsv_sj0s[0] > deepcsvm or deepcsv_sj1s[0] > deepcsvm  or deepcsv_sj0s[1] > deepcsvm or deepcsv_sj1s[1] > deepcsvm
+    sjbtag_2 = (deepcsv_sj0s[0] > deepcsvm or deepcsv_sj1s[0] > deepcsvm) and (deepcsv_sj0s[1] > deepcsvm or deepcsv_sj1s[1] > deepcsvm) 
+    sjbtag_3 = ( (deepcsv_sj0s[0] > deepcsvm and deepcsv_sj1s[0] > deepcsvm) and (deepcsv_sj0s[1] > deepcsvm or deepcsv_sj1s[1] > deepcsvm) ) or\
+        ( (deepcsv_sj0s[0] > deepcsvm or deepcsv_sj1s[0] > deepcsvm) and (deepcsv_sj0s[1] > deepcsvm and deepcsv_sj1s[1] > deepcsvm) )
+    sjbtag_4 = deepcsv_sj0s[0] > deepcsvm and deepcsv_sj1s[0] > deepcsvm  and deepcsv_sj0s[1] > deepcsvm and deepcsv_sj1s[1] > deepcsvm 
 
     hjetssel   = ptsel and etasel and msdsel and tau21sel 
 
-    sjbtagsel = sjbtag_3
+    sjbtagsel = sjbtag_4
 
     ### Select AK4 jets for VBF pair identification
     p4_ak4sel = []
@@ -220,13 +224,18 @@ for fname in fnames:
 
     h2_ak8pt_ak8eta.Fill(pts[0], etas[0])
     h2_ak8pt_ak8eta.Fill(pts[1], etas[1])
-   
+    
+    h2_sjpt_sjeta.Fill(sjpts[0], sjetas[0])
+    h2_sjpt_sjeta.Fill(sjpts[1], sjetas[1])   
+    
     ### Jet 1 passing Higgs tagging:
-    if 80 < sd_masses[0] < 160 and tau2s[0]/tau1s[0] < 0.6 and deepcsv_sj0s[0] > deepcsvl and deepcsv_sj1s[0] > deepcsvl:
+    if 80 < sd_masses[0] < 160 and tau2s[0]/tau1s[0] < 0.6 and deepcsv_sj0s[0] > deepcsvm and deepcsv_sj1s[0] > deepcsvm:
       h2_ak8pt_ak8eta_htagged.Fill(pts[0], etas[0])
+      h2_sjpt_sjeta_btagged.Fill(sjpts[0], sjetas[0])
     ### Jet 2 passing Higgs tagging:
-    if 80 < sd_masses[1] < 160 and tau2s[1]/tau1s[1] < 0.6 and deepcsv_sj0s[1] > deepcsvl and deepcsv_sj1s[1] > deepcsvl:
+    if 60 < sd_masses[1] < 140 and tau2s[1]/tau1s[1] < 0.6 and deepcsv_sj0s[1] > deepcsvm and deepcsv_sj1s[1] > deepcsvm:
       h2_ak8pt_ak8eta_htagged.Fill(pts[1], etas[1])
+      h2_sjpt_sjeta_btagged.Fill(sjpts[1], sjetas[1])
 
     ### Fill Higgs jet quantities after VBF selection:
     p4_ak80 = ROOT.TLorentzVector()
