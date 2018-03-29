@@ -225,17 +225,20 @@ for fname in fnames:
     h2_ak8pt_ak8eta.Fill(pts[0], etas[0])
     h2_ak8pt_ak8eta.Fill(pts[1], etas[1])
     
-    h2_sjpt_sjeta.Fill(sjpts[0], sjetas[0])
-    h2_sjpt_sjeta.Fill(sjpts[1], sjetas[1])   
-    
+    h2_sjpt_sjeta.Fill(sj0_pts[0], sj0_etas[0])
+    h2_sjpt_sjeta.Fill(sj0_pts[1], sj0_etas[1])
+    h2_sjpt_sjeta.Fill(sj1_pts[0], sj1_etas[0])   
+    h2_sjpt_sjeta.Fill(sj1_pts[1], sj1_etas[1])
     ### Jet 1 passing Higgs tagging:
     if 80 < sd_masses[0] < 160 and tau2s[0]/tau1s[0] < 0.6 and deepcsv_sj0s[0] > deepcsvm and deepcsv_sj1s[0] > deepcsvm:
       h2_ak8pt_ak8eta_htagged.Fill(pts[0], etas[0])
-      h2_sjpt_sjeta_btagged.Fill(sjpts[0], sjetas[0])
+      h2_sjpt_sjeta_btagged.Fill(sj0_pts[0], sj0_etas[0])
+      h2_sjpt_sjeta_btagged.Fill(sj1_pts[0], sj0_etas[0])
     ### Jet 2 passing Higgs tagging:
     if 60 < sd_masses[1] < 140 and tau2s[1]/tau1s[1] < 0.6 and deepcsv_sj0s[1] > deepcsvm and deepcsv_sj1s[1] > deepcsvm:
       h2_ak8pt_ak8eta_htagged.Fill(pts[1], etas[1])
-      h2_sjpt_sjeta_btagged.Fill(sjpts[1], sjetas[1])
+      h2_sjpt_sjeta_btagged.Fill(sj0_pts[1], sj0_etas[1])
+      h2_sjpt_sjeta_btagged.Fill(sj1_pts[1], sj1_etas[1])
 
     ### Fill Higgs jet quantities after VBF selection:
     p4_ak80 = ROOT.TLorentzVector()
