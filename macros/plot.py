@@ -291,7 +291,7 @@ def htagEff(fname):
 
   return heff
 
-htagEff('/afs/cern.ch/user/l/lata/public/plots/root_files_htag/QCD_200PU.root')
+#htagEff('/afs/cern.ch/user/l/lata/public/plots/root_files_htag/QCD_200PU.root')
 
 
 def bTagEff(fname):
@@ -327,9 +327,9 @@ def bTagEff(fname):
   ceff = ROOT.TCanvas('ceff_htag', '', 800, 600)
   ceff.cd()
   heff.Draw('colz')
-  ceff.SaveAs(beff.GetName()+'.pdf')
+  ceff.SaveAs(ceff.GetName()+'.pdf')
 
-  fout = ROOT.TFile('beff_200.root', 'recreate')
+  fout = ROOT.TFile('beff_0.root', 'recreate')
   fout.cd()
   hnum.Write()
   hden.Write()
@@ -338,6 +338,6 @@ def bTagEff(fname):
 
   return heff
 
-bTagEff('/afs/cern.ch/user/l/lata/public/plots/root_files_htag/QCD_200PU.root')
+bTagEff('QCD_0PU_test.root')
 
 

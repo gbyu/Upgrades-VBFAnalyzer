@@ -30,6 +30,22 @@ def getHTagEff(ptin, etain):
       else: continue
   return 0
 
+def getBTagEff(ptin, etain):
+  etain = abs(etain)
+  f = ROOT.TFile.Open('beff_0.root')
+  heff = f.Get('heff')
+  for i in range(0, heff.GetNbinsX()+2):
+    for j in range(0, heff.GetNbinsY()+01):
+      pt       = heff.GetXaxis().GetBinLowEdge(i)
+      eta      = heff.GetYaxis().GetBinLowEdge(j)
+      ptwidth  = heff.GetXaxis().GetBinWidth(i)
+      etawidth = heff.GetYaxis().GetBinWidth(j)
+      if pt <= ptin < pt+ptwidth and eta <= etain < eta+etawidth:
+        return heff.GetBinContent(i,j)
+      else: continue
+  return 0
+
+
 files  = sys.argv[1]
 
 fout = ROOT.TFile(files.rstrip().replace('txt', 'root'), 'RECREATE')
@@ -72,6 +88,7 @@ h_sj1_deepcsv                = ROOT.TH1D("h_sj1_deepcsv"                ,";DeepC
 
 h_mjj_vbfsel                 = ROOT.TH1D("h_mjj_vbfsel"                 ,";M(jj) [GeV]; Events;"         ,400  ,500.   ,4500 )
 h_mjj_vbfsel_scaledHTagEff   = ROOT.TH1D("h_mjj_vbfsel_scaledHTagEff"   ,";M(jj) [GeV]; Events;"         ,400  ,500.   ,4500 )
+h_mjj_vbfsel_scaledSJBTagEff   = ROOT.TH1D("h_mjj_vbfsel_scaledBTagEff"   ,";M(jj) [GeV]; Events;"         ,400  ,500.   ,4500 )
 h_mjj_novbf_nosjbtag         = ROOT.TH1D("h_mjj_novbf_nosjbtag"         ,";M(jj) [GeV]; Events;"         ,400  ,500.   ,4500 )
 h_mjj_novbf_2sjbtag          = ROOT.TH1D("h_mjj_novbf_2sjbtag"          ,";M(jj) [GeV]; Events;"         ,400  ,500.   ,4500 )
 h_mjj                        = ROOT.TH1D("h_mjj"                        ,";M(jj) [GeV]; Events;"         ,400  ,500.   ,4500 )
@@ -255,6 +272,10 @@ for fname in fnames:
       hjet1eff = getHTagEff(pts[0], etas[0])
       hjet2eff = getHTagEff(pts[1], etas[1])
       h_mjj_vbfsel_scaledHTagEff.Fill(mjj, hjet1eff*hjet2eff)
+
+      bsj1eff = getBTagEff(pts[0], etas[0])
+      bsj2eff = getBTagEff(pts[1], etas[1])
+      h_mjj_vbfsel_scaledSJBTagEff.Fill(mjj, bsj1eff*bsj2eff)
 
       if etasel and msdsel and tau21sel and sjbtagsel:
         h_ak80pt.Fill(pts[0])
