@@ -12,7 +12,7 @@ The script looks for the following input files in the current dir:
 You may also have the same set of files with PU=200:
   VBF_M1500_W01_PU200.root
   VBF_M3000_W01_PU200.root
-  QCD_Mdijet-1000toInf_PU200.rooto
+  QCD_Mdijet-1000toInf_PU200.root
 '''
 
 helper   = imp.load_source('fix'     , 'help.py')
@@ -254,7 +254,7 @@ def htagEff(fname):
   hn = f.Get('h2_ak8pt_ak8eta_htagged')
 
   ptbins = [300., 500., 1000., 3000.]
-  etabins = [0., 0.8, 3.0]
+  etabins = [0., 0.8, 2.4]
   hden = ROOT.TH2D('hden', '', len(ptbins)-1, np.asarray(ptbins, 'd'), len(etabins)-1, np.asarray(etabins, 'd'))
   hnum = ROOT.TH2D('hnum', '', len(ptbins)-1, np.asarray(ptbins, 'd'), len(etabins)-1, np.asarray(etabins, 'd'))
 
@@ -282,7 +282,7 @@ def htagEff(fname):
   heff.Draw('colz')
   ceff.SaveAs(ceff.GetName()+'.pdf')
 
-  fout = ROOT.TFile('heff_200.root', 'recreate')
+  fout = ROOT.TFile('heff.root', 'recreate')
   fout.cd()
   hnum.Write()
   hden.Write()
@@ -291,53 +291,179 @@ def htagEff(fname):
 
   return heff
 
-#htagEff('/afs/cern.ch/user/l/lata/public/plots/root_files_htag/QCD_200PU.root')
+def msd(fin):
+  f = ROOT.TFile.Open(fin, "read")
 
+  h2_msd0_npv = f.Get("h2_msd0_npv")
+  h2_msd1_npv = f.Get("h2_msd1_npv")
 
-def bTagEff(fname):
+  h2_msd0_npv_pfx = h2_msd0_npv.ProfileX()
+  h2_msd1_npv_pfx = h2_msd1_npv.ProfileX()
 
-  f = ROOT.TFile.Open(fname)
-  hd = f.Get('h2_sjpt_sjeta')
-  hn = f.Get('h2_sjpt_sjeta_btagged')
+  h2_msd0_npv_pfx.SetMarkerStyle(20)
+  h2_msd1_npv_pfx.SetMarkerStyle(20)
 
-  ptbins = [100., 300., 500., 1000.]
-  etabins = [0., 0.8, 3.0]
-  hden = ROOT.TH2D('hden', '', len(ptbins)-1, np.asarray(ptbins, 'd'), len(etabins)-1, np.asarray(etabins, 'd'))
-  hnum = ROOT.TH2D('hnum', '', len(ptbins)-1, np.asarray(ptbins, 'd'), len(etabins)-1, np.asarray(etabins, 'd'))
+  h2_msd0_npv.GetZaxis().SetTitle("Events/ bin")
+  h2_msd1_npv.GetZaxis().SetTitle("Events/ bin")
 
-  nbinsx = hd.GetNbinsX()
-  nbinsy = hd.GetNbinsY()
+  c0 = ROOT.TCanvas("c_msd0_npv", "", 800, 600)
+  c0.cd()
+  c0.SetRightMargin(0.15)
+  h2_msd0_npv.Draw("colz")
+  h2_msd0_npv_pfx.Draw("same")
+  c0.SaveAs(c0.GetName()+".pdf")
 
-  for i in range(0, nbinsx+1):
-    for j in range(0, nbinsy+1):
-      pt = hd.GetXaxis().GetBinCenter(i)
-      eta = abs(hd.GetYaxis().GetBinCenter(j))
-      d = hd.GetBinContent(i, j)
-      n = hn.GetBinContent(i, j)
-      hden.Fill(pt, eta, d)
-      hnum.Fill(pt, eta, n)
+  c1 = ROOT.TCanvas("c_msd1_npv", "", 800, 600)
+  c1.cd()
+  c1.SetRightMargin(0.15)
+  h2_msd1_npv.Draw("colz")
+  h2_msd1_npv_pfx.Draw("same")
+  c1.SaveAs(c1.GetName()+".pdf")
 
-  heff = hnum.Clone('heff')
-  heff.Divide(hden)
+#msd("VBF_M1500_W01_PU200.root")
+#msd("VBF_M3000_W01_PU200.root")
 
-  for i in range(1, heff.GetNbinsX()+1):
-    for j in range(1, heff.GetNbinsY()+1):
-      print "pt %f eta %f eff %f" % (heff.GetXaxis().GetBinCenter(i), heff.GetYaxis().GetBinCenter(j), heff.GetBinContent(i, j))
+def plotCompare(fins, hname, labels):
+  
+  hframe = ROOT.TH1D("hframe",";N(VBF pairs); A.U.;" ,201  ,-0.5  ,200.5)
 
-  ceff = ROOT.TCanvas('ceff_htag', '', 800, 600)
-  ceff.cd()
-  heff.Draw('colz')
-  ceff.SaveAs(ceff.GetName()+'.pdf')
+  c = ROOT.TCanvas("c_%s" % hname, "", 800, 600)
+  c.cd()
+  c.SetLogy()
 
-  fout = ROOT.TFile('beff_0.root', 'recreate')
-  fout.cd()
-  hnum.Write()
-  hden.Write()
-  heff.Write()
-  fout.Close()
+  hframe.Draw()
+  c.SetSelected(hframe)
+  c.Modified()
+  c.Update()
 
-  return heff
+  leg = ROOT.TLegend(0.50,0.60,0.88,0.75,'','brNDC')
+  leg.SetBorderSize(0)
+  leg.SetFillColor(0)
+  leg.SetTextSize(0.030)
+  leg.SetMargin(0.2)  
+  leg.SetNColumns(2)
+  leg.SetColumnSeparation(0.05)
+  leg.SetEntrySeparation(0.05)
+  leg.SetHeader("Signal: M=3000 GeV")
+  
+  hmax = 2
+  i = 1
+  for fin in fins:
+    f = ROOT.TFile.Open(fin, "read")
+    label = labels[fins.index(fin)]
+    hist = f.Get(hname)
+    h = copy.deepcopy(hist)
+    h.Scale(1./h.Integral())
 
-bTagEff('QCD_0PU_test.root')
+    if h.GetMaximum() > hmax: hmax = h.GetMaximum()
+    hframe.SetMaximum(1.2* hmax)
 
+    h.SetName("%s_label" % hname)
+    h.Draw("histsame")
+    h.SetLineWidth(2)
+    h.SetLineColor(i)
 
+    c.SetSelected(h)
+    leg.AddEntry(h, label, 'l')
+
+    i += 1
+
+  leg.Draw()
+
+  c.RedrawAxis()
+  c.Update()
+
+  c.SaveAs('%s.pdf' % c.GetName())
+  c.SaveAs('%s.png' % c.GetName())
+
+fins=['VBF_M3000_W01_PU200_vbfpairs.root', 'VBF_M3000_W01_PU0_vbfpairs.root']
+labels = ['PU200', 'PU0']
+
+plotCompare(fins, "h_nvbfpairs", labels)
+
+#htagEff('/afs/cern.ch/user/l/lata/public/plots/QCD_0PU.root')
+
+def getCDF(h):
+  hcdf = h.Clone(h.GetName()+"_cdf")
+  hcdf.Reset()
+  for i in range(1, h.GetNbinsX()+1):
+    hcdf.Fill(h.GetBinCenter(i), h.Integral(i, h.GetNbinsX()) )
+  return hcdf
+
+def getROC(hs, hb):
+  ns = hs.GetNbinsX()
+  nb = hs.GetNbinsX()
+
+  xlo_s = hs.GetBinLowEdge(1)
+  xlo_b = hb.GetBinLowEdge(1)
+
+  xhi_s = hs.GetBinLowEdge(ns) + hs.GetBinWidth(ns)
+  xhi_b = hb.GetBinLowEdge(nb) + hs.GetBinWidth(nb)
+
+  if xhi_s != xhi_b and  xlo_s != xlo_b:
+    print "sig and bkg have different ranges"
+    return -1
+  else:
+    print 'OK'
+  hs_cdf = getCDF(hs)
+  hb_cdf = getCDF(hb)
+
+  hs_cdf.Scale(1./hs_cdf.GetBinContent(1))
+  hb_cdf.Scale(1./hb_cdf.GetBinContent(1))
+
+  sigeff = []
+  bkgeff = []
+
+  for i in range(ns-1, 0, -1):
+    print "i = %i sigeff = %f bkgeff = %f" % (i, hs_cdf.GetBinContent(i), hb_cdf.GetBinContent(i))
+    sigeff.append(hs_cdf.GetBinContent(i))
+    bkgeff.append(hb_cdf.GetBinContent(i))
+
+  groc = ROOT.TGraph(ns, np.asarray(sigeff, 'd'), np.asarray(bkgeff, 'd'))
+
+  return groc
+
+def makeROC():
+  fs = ROOT.TFile.Open("/afs/cern.ch/user/l/lata/public/plots/VBF_M1500_W01_PU200.root", "READ")
+  fb = ROOT.TFile.Open("/afs/cern.ch/user/l/lata/public/plots/QCD_Mdijet-1000toInf_PU200.root", "READ")
+  
+  hdeepcsv_sig = fs.Get('h_sj0_deepcsv') + fs.Get('h_sj1_deepcsv')
+  hdeepcsv_bkg = fb.Get('h_sj0_deepcsv') + fb.Get('h_sj1_deepcsv')
+  
+  hcsvv2_sig = fs.Get('h_sj0_csvv2') + fs.Get('h_sj1_csvv2')
+  hcsvv2_bkg = fb.Get('h_sj0_csvv2') + fb.Get('h_sj1_csvv2')
+  
+  groc_deepcsv = getROC(hdeepcsv_sig, hdeepcsv_bkg)
+  groc_csvv2 = getROC(hcsvv2_sig, hcsvv2_bkg)
+  
+  ROOT.gROOT.SetBatch()
+  ROOT.gROOT.SetStyle('Plain')
+  ROOT.gStyle.SetOptTitle(0) 
+  ROOT.gStyle.SetOptStat(0000) 
+  ROOT.gStyle.SetOptFit(0111) 
+  ROOT.gStyle.SetErrorX(0.0001);
+  
+  c = ROOT.TCanvas('c_roc_PU0', '', 800, 600)
+  c.cd()
+  groc_deepcsv.Draw("ALP")
+  groc_csvv2.Draw("LP")
+  groc_deepcsv.SetLineStyle(2)
+  groc_csvv2.SetLineColor(2)
+  groc_deepcsv.GetHistogram().GetXaxis().SetTitle('b tag eff.')
+  groc_deepcsv.GetHistogram().GetYaxis().SetTitle('mistag tag eff.')
+  #groc_deepcsv.GetHistogram().SetMinimum(0.)
+  #groc_deepcsv.GetHistogram().SetMaximum(1.)
+  leg = ROOT.TLegend(0.15,0.60,0.50,0.75,'','brNDC')
+  leg.SetHeader('PU = 0')
+  leg.SetBorderSize(0)
+  leg.SetFillColor(0)
+  leg.SetTextSize(0.030)
+  leg.SetMargin(0.2)  
+  leg.SetNColumns(1)
+  leg.SetColumnSeparation(0.05)
+  leg.SetEntrySeparation(0.05)
+  leg.AddEntry(groc_deepcsv, 'DeepCSV', 'l')
+  leg.AddEntry(groc_csvv2  , 'CSVv2'  , 'l')
+  leg.Draw()
+  c.SaveAs('%s.pdf' % c.GetName())
+  c.SaveAs('%s.png' % c.GetName())
