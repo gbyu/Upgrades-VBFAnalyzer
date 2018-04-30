@@ -200,12 +200,14 @@ def main():
   h_ak81pt                     = ROOT.TH1D("h_ak81pt"                     ,";p_{T} [GeV]; Events;;"        ,300  ,0.    ,3000 )
   h_ak80eta                    = ROOT.TH1D("h_ak80eta"                    ,";#eta;;"                       ,200  ,-5    ,5    )
   h_ak81eta                    = ROOT.TH1D("h_ak81eta"                    ,";#eta;;"                       ,200  ,-5    ,5    )
-  h_ak80_tau2_tau1             = ROOT.TH1D("h_ak80_t2byt1"                ,";#tau_{2}/#tau_{1};;"          ,100  ,0     ,1    )
-  h_ak81_tau2_tau1             = ROOT.TH1D("h_ak81_t2byt1"                ,";#tau_{2}/#tau_{1} ;;"         ,100  ,0     ,1    )
-  h_sdmass_ak80_3b             = ROOT.TH1D("h_sdmass_ak80"                ,";softdropped_mass[GeV];;"      ,100  ,0     ,1000 )
-  h_sdmass_ak81_3b             = ROOT.TH1D("h_sdmass_ak81"                ,";softdropped_mass[GeV];;"      ,100  ,0     ,1000 )
-  h_sdmass_ak80_4b             = ROOT.TH1D("h_sdmass_ak80"                ,";softdropped_mass[GeV];;"      ,100  ,0     ,1000 )
-  h_sdmass_ak81_4b             = ROOT.TH1D("h_sdmass_ak81"                ,";softdropped_mass[GeV];;"      ,100  ,0     ,1000 )
+  h_ak80_tau2_tau1_3b          = ROOT.TH1D("h_ak80_t2byt1_3b"                ,";#tau_{2}/#tau_{1};;"          ,100  ,0     ,1    )
+  h_ak81_tau2_tau1_3b          = ROOT.TH1D("h_ak81_t2byt1_3b"                ,";#tau_{2}/#tau_{1} ;;"         ,100  ,0     ,1    )
+  h_ak80_tau2_tau1_4b          = ROOT.TH1D("h_ak80_t2byt1_4b"                ,";#tau_{2}/#tau_{1};;"          ,100  ,0     ,1    )
+  h_ak81_tau2_tau1_4b          = ROOT.TH1D("h_ak81_t2byt1_4b"                ,";#tau_{2}/#tau_{1} ;;"         ,100  ,0     ,1    )
+  h_sdmass_ak80_3b             = ROOT.TH1D("h_sdmass_ak80_3b"                ,";softdropped_mass[GeV];;"      ,100  ,0     ,1000 )
+  h_sdmass_ak81_3b             = ROOT.TH1D("h_sdmass_ak81_3b"                ,";softdropped_mass[GeV];;"      ,100  ,0     ,1000 )
+  h_sdmass_ak80_4b             = ROOT.TH1D("h_sdmass_ak80_4b"                ,";softdropped_mass[GeV];;"      ,100  ,0     ,1000 )
+  h_sdmass_ak81_4b             = ROOT.TH1D("h_sdmass_ak81_4b"                ,";softdropped_mass[GeV];;"      ,100  ,0     ,1000 )
   h_nvbfpairs                  = ROOT.TH1D("h_nvbfpairs"                  ,";N(VBF pairs); Events;;"       ,201  ,-0.5  ,200.5 )
   h_vbf0pt                     = ROOT.TH1D("h_vbf0pt"                     ,";p_{T} (VBF) [GeV]; Events;;"  ,100  ,0.    ,1000 )
   h_vbf1pt                     = ROOT.TH1D("h_vbf1pt"                     ,";p_{T} (VBF) [GeV]; Events;;"  ,100  ,0.    ,1000 )
@@ -275,57 +277,23 @@ def main():
       nak8 = len(pts)
   
       h_cutflow.Fill(1)
-  
       ### Selecting at least two AK8 jets:
-      if nak8 >= opt.nak8Min:
-        h_cutflow.Fill(2)
-      else: continue
-  
+      if nak8 < 2: continue
       etas   = event.AK8JetsPuppi_eta
-  
       ptsel  = pts[0] > opt.ptak8_0_Min and pts[1] > opt.ptak8_1_Min
+
       etasel = abs(etas[0]) < opt.etaak8_0_Max and abs(etas[1]) < opt.etaak8_1_Max
-  
-      if ptsel and etasel: 
-        h_cutflow.Fill(3)
-      else: continue
-  
       detasel = abs(etas[0] - etas[1]) < opt.detaak8Max
-      if detasel:
-        h_cutflow.Fill(4)
-      else: continue
-  
+
       tau1s           = event.AK8JetsPuppi_tau1Puppi
       tau2s           = event.AK8JetsPuppi_tau2Puppi
   
       tau21sel = tau2s[0]/tau1s[0] < opt.t21_0_Max and tau2s[1]/tau1s[1] < opt.t21_1_Max
-      if tau21sel:
-        h_cutflow.Fill(5)
-      else: continue 
   
       sd_masses       = event.AK8JetsPuppi_softDropMassPuppi 
 
-      sjbtag_1 = deepcsv_sj0s[0] > opt.deepcsvMin or deepcsv_sj1s[0] > opt.deepcsvMin  or deepcsv_sj0s[1] > opt.deepcsvMin or deepcsv_sj1s[1] > opt.deepcsvMin
-      sjbtag_2 = (deepcsv_sj0s[0] > opt.deepcsvMin or deepcsv_sj1s[0] > opt.deepcsvMin) and (deepcsv_sj0s[1] > opt.deepcsvMin or deepcsv_sj1s[1] > opt.deepcsvMin) 
-      sjbtag_3 = ( (deepcsv_sj0s[0] > opt.deepcsvMin and deepcsv_sj1s[0] > opt.deepcsvMin) and (deepcsv_sj0s[1] > opt.deepcsvMin or deepcsv_sj1s[1] > opt.deepcsvMin) ) or\
-          ( (deepcsv_sj0s[0] > opt.deepcsvMin or deepcsv_sj1s[0] > opt.deepcsvMin) and (deepcsv_sj0s[1] > opt.deepcsvMin and deepcsv_sj1s[1] > opt.deepcsvMin) )
-      sjbtag_4 = deepcsv_sj0s[0] > opt.deepcsvMin and deepcsv_sj1s[0] > opt.deepcsvMin  and deepcsv_sj0s[1] > opt.deepcsvMin and deepcsv_sj1s[1] > opt.deepcsvMin   
-      if sjbtag_3:
-        h_sdmass_ak80_3b.Fill(sd_masses[0])
-        h_sdmass_ak81_3b.Fill(sd_masses[1])
-      if sjbatg_4:
-        h_sdmass_ak80_4b.Fill(sd_masses[0])
-        h_sdmass_ak81_4b.Fill(sd_masses[1])
-
-      npv =          event.npv
-      h2_msd0_npv.Fill(npv, sd_masses[0])
-      h2_msd1_npv.Fill(npv, sd_masses[1])
   
       msdsel     = opt.msd_0_Min < sd_masses[0] < opt.msd_0_Max and opt.msd_1_Min < sd_masses[1] < opt.msd_1_Max
-      if msdsel:
-        h_cutflow.Fill(6)
-      else: continue 
-  
       #### Store Higgs cand p4 for future use
 
       phis            = event.AK8JetsPuppi_phi
@@ -350,24 +318,6 @@ def main():
       deepcsv_sj0s    = event.AK8JetsPuppi_sj0deepcsv
       deepcsv_sj1s    = event.AK8JetsPuppi_sj1deepcsv
   
-      for i in [0,1]:
-        if abs(sj0_fls[i]) == 5: h2_bFl_sjpt_sjeta.Fill(sj0_pts[i], sj0_etas[i])
-        elif abs(sj0_fls[i]) == 4: h2_cFl_sjpt_sjeta.Fill(sj0_pts[i], sj0_etas[i])
-        else: h2_lFl_sjpt_sjeta.Fill(sj0_pts[i], sj0_etas[i])
-  
-        if abs(sj1_fls[i]) == 5: h2_bFl_sjpt_sjeta.Fill(sj1_pts[i], sj1_etas[i])
-        elif abs(sj1_fls[i]) == 4: h2_cFl_sjpt_sjeta.Fill(sj1_pts[i], sj1_etas[i])
-        else: h2_lFl_sjpt_sjeta.Fill(sj1_pts[i], sj1_etas[i])
-  
-        if deepcsv_sj0s[i] > opt.deepcsvMin: 
-          if abs(sj0_fls[i]) == 5: h2_bFl_sjpt_sjeta_btagged.Fill(sj0_pts[i], sj0_etas[i])
-          elif abs(sj0_fls[i]) == 4: h2_cFl_sjpt_sjeta_btagged.Fill(sj0_pts[i], sj0_etas[i])
-          else: h2_lFl_sjpt_sjeta_btagged.Fill(sj0_pts[i], sj0_etas[i])
-  
-        if deepcsv_sj1s[i] > opt.deepcsvMin: 
-          if abs(sj1_fls[i]) == 5: h2_bFl_sjpt_sjeta_btagged.Fill(sj1_pts[i], sj1_etas[i])
-          elif abs(sj1_fls[i]) == 4: h2_cFl_sjpt_sjeta_btagged.Fill(sj1_pts[i], sj1_etas[i])
-          else: h2_lFl_sjpt_sjeta_btagged.Fill(sj1_pts[i], sj1_etas[i])
   
       ### VBF jet sel:
       pts_ak4         = event.AK4JetsCHS_pt
@@ -378,7 +328,9 @@ def main():
       nak4 = len(pts_ak4)
       h_nak8.Fill(nak8)
       h_nak4.Fill(nak4)
-  
+
+      if nak4 < 2 or len(sj0_pts) < 2 or len(sj1_pts) < 2: continue  # selectinf events with 2 ak4 jets and 4 subjets
+
       ### Select AK4 jets for VBF pair identification
       p4_ak4sel = []
       for i in range(0,nak4):
@@ -414,71 +366,26 @@ def main():
       vbfsel = nvbfpairs > 0
       h_nvbfpairs.Fill(nvbfpairs)
 
-      if vbfsel:
-        h_cutflow.Fill(7)
-      else: continue
-
       sjbtag_1 = deepcsv_sj0s[0] > opt.deepcsvMin or deepcsv_sj1s[0] > opt.deepcsvMin  or deepcsv_sj0s[1] > opt.deepcsvMin or deepcsv_sj1s[1] > opt.deepcsvMin
       sjbtag_2 = (deepcsv_sj0s[0] > opt.deepcsvMin or deepcsv_sj1s[0] > opt.deepcsvMin) and (deepcsv_sj0s[1] > opt.deepcsvMin or deepcsv_sj1s[1] > opt.deepcsvMin) 
       sjbtag_3 = ( (deepcsv_sj0s[0] > opt.deepcsvMin and deepcsv_sj1s[0] > opt.deepcsvMin) and (deepcsv_sj0s[1] > opt.deepcsvMin or deepcsv_sj1s[1] > opt.deepcsvMin) ) or\
           ( (deepcsv_sj0s[0] > opt.deepcsvMin or deepcsv_sj1s[0] > opt.deepcsvMin) and (deepcsv_sj0s[1] > opt.deepcsvMin and deepcsv_sj1s[1] > opt.deepcsvMin) )
       sjbtag_4 = deepcsv_sj0s[0] > opt.deepcsvMin and deepcsv_sj1s[0] > opt.deepcsvMin  and deepcsv_sj0s[1] > opt.deepcsvMin and deepcsv_sj1s[1] > opt.deepcsvMin 
   
-      wt_3b = 1
-      wt_4b = 1
+      if vbfsel:
+	if ptsel and etasel and tau21sel and sjbtag_3:
+	  h_sdmass_ak80_3b.Fill(sd_masses[0])
+	  h_sdmass_ak81_3b.Fill(sd_masses[1])
+	if ptsel and etasel and tau21sel and sjbtag_4:
+          h_sdmass_ak80_4b.Fill(sd_masses[0])
+          h_sdmass_ak81_4b.Fill(sd_masses[1])
+	if ptsel and etasel and msdsel and sjbtag_3:
+          h_ak80_tau2_tau1_3b.Fill(tau2s[0]/tau1s[0])
+          h_ak81_tau2_tau1_3b.Fill(tau2s[1]/tau1s[1])
+        if ptsel and etasel and msdsel and sjbtag_4:
+          h_ak80_tau2_tau1_4b.Fill(tau2s[0]/tau1s[0])
+          h_ak81_tau2_tau1_4b.Fill(tau2s[1]/tau1s[1])
 
-      #### Get event weights for 3b and 4b selections for QCD samples
-      if 'QCD' in fname:
-        if opt.deepcsvMin == 0.1522:
-          btagwp = 'WPL'
-        elif opt.deepcsvMin == 0.4941:
-          btagwp = 'WPM'
-
-        nPU = opt.files.rstrip('.txt').split('_')[-1].lstrip('PU')
-
-        if abs(sj0_fls[0]) == 5: effmap = 'beff_{0}_{1}.root'.format(nPU, btagwp)
-        elif abs(sj0_fls[0]) == 4: effmap = 'ceff_{0}_{1}.root'.format(nPU, btagwp)
-        else: effmap = 'lighteff_{0}_{1}.root'.format(nPU, btagwp)
-        btageff_sj00 = getSJBTagEff(sj0_pts[0], sj0_etas[0], "effs/{}".format(effmap))
-
-        if abs(sj0_fls[1]) == 5: effmap = 'beff_{0}_{1}.root'.format(nPU, btagwp)
-        elif abs(sj0_fls[1]) == 4: effmap = 'ceff_{0}_{1}.root'.format(nPU, btagwp)
-        else: effmap = 'lighteff_{0}_{1}.root'.format(nPU, btagwp)
-        btageff_sj01 = getSJBTagEff(sj0_pts[1], sj0_etas[1], "effs/{}".format(effmap))
-
-        if abs(sj1_fls[0]) == 5: effmap = 'beff_{0}_{1}.root'.format(nPU, btagwp)
-        elif abs(sj1_fls[0]) == 4: effmap = 'ceff_{0}_{1}.root'.format(nPU, btagwp)
-        else: effmap = 'lighteff_{0}_{1}.root'.format(nPU, btagwp)
-        btageff_sj10 = getSJBTagEff(sj1_pts[0], sj1_etas[0], "effs/{}".format(effmap))
-
-        if abs(sj1_fls[1]) == 5: effmap = 'beff_{0}_{1}.root'.format(nPU, btagwp)
-        elif abs(sj1_fls[1]) == 4: effmap = 'ceff_{0}_{1}.root'.format(nPU, btagwp)
-        else: effmap = 'lighteff_{0}_{1}.root'.format(nPU, btagwp)
-        btageff_sj11 = getSJBTagEff(sj1_pts[1], sj1_etas[1], "effs/{}".format(effmap))
-
-        #print 'btageff {4} = {0} {5} = {1} {6} = {2} {7} = {3}'.format(btageff_sj00, btageff_sj01, btageff_sj10, btageff_sj11,\
-        #    sj0_fls[0], sj0_fls[1], sj1_fls[0], sj1_fls[1])
-
-        wt_3b = ( btageff_sj00 * btageff_sj01 * btageff_sj10 * (1 - btageff_sj11) ) +\
-            ( btageff_sj00 * btageff_sj01 * (1 - btageff_sj10) * btageff_sj11 ) + \
-            ( btageff_sj00 * (1- btageff_sj01) * btageff_sj10 * btageff_sj11 ) + \
-            ( (1 - btageff_sj00) * btageff_sj01 * btageff_sj10 * btageff_sj11 )
-        wt_4b = btageff_sj00 * btageff_sj01 * btageff_sj10 * btageff_sj11
-
-        #print 'wt_3b = {0} wt_4b = {1}'.format(wt_3b, wt_4b)
-  
-      if sjbtag_2:
-        h_cutflow.Fill(8)
-        if sjbtag_3:
-          h_cutflow.Fill(9)
-          if sjbtag_4:
-            h_cutflow.Fill(10)
-  
-      mjj = (p4_ak80 + p4_ak81).Mag()
-      #if sjbtag_3: 
-      h_mjj_3b.Fill(mjj, wt_3b)
-      #if sjbtag_4: 
-      h_mjj_4b.Fill(mjj, wt_4b)
   
   fout.cd()
   
