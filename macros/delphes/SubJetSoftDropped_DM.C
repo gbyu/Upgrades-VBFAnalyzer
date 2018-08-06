@@ -18,27 +18,29 @@ using namespace std;
 
   double getEff_b(double ptin, double etain, const int pu) {
 
-    double pt,eta,ptwidth,etawidth,eff; 
+    double pt=0.,eta=0.,ptwidth=0.,etawidth=0.,eff=0.; 
     
     etain = abs(etain);
     if (ptin > 3000.) ptin = 2999.99;
 
     TFile f("effs/beff_200PU_WPM.root");
+   // if ( f.IsOpen() ) printf("File opened successfully\n");
+    //f.ls();
     TH1F *heff = (TH1F*)f.Get("heff");
-    int x_range=(heff->GetNbinsX())+2;
-    int y_range=(heff->GetNbinsY())+1;
-    for(int i=0; i < x_range; i++){
-       for(int j=0; i < y_range; j++){
+    int x_range=(heff->GetNbinsX());
+    int y_range=(heff->GetNbinsY());
+    for(int i=1; i < x_range+1; i++){
+       for(int j=1; j < y_range+1; j++){
          pt       = heff->GetXaxis()->GetBinLowEdge(i);
          eta      = heff->GetYaxis()->GetBinLowEdge(j);
          ptwidth  = heff->GetXaxis()->GetBinWidth(i);
          etawidth = heff->GetYaxis()->GetBinWidth(j);
-	 if (pt <= ptin < pt+ptwidth && eta <= etain < eta+etawidth){
+         if (pt <= ptin && ptin < (pt+ptwidth)){
+           if (eta <= etain && etain < (eta+etawidth)){
+           
            eff=heff->GetBinContent(i,j);
-           cout<<"test1....."<<endl;
-         }
-         else {
-        eff = 0;
+           //cout<<"test1....."<<eff<<endl;
+          }
         }
       }
     }
@@ -73,7 +75,6 @@ void SubJetSoftDropped_DM(const int pu)
     TChain chain("Delphes");
     for(int i=0; i<1; i++){
     chain.Add(file[i]);
-
   // Create object of class ExRootTreeReader
   ExRootTreeReader *treeReader = new ExRootTreeReader(&chain);
   Int_t numberOfEntries = treeReader->GetEntries();
@@ -109,6 +110,7 @@ void SubJetSoftDropped_DM(const int pu)
   TH1D *NSubJet_fatjet2     = new TH1D("NSubJet_fatjet2"    , "no. of SubJets(2nd leading Jet)",5,0,5);
   TH1F *h_ak80_tau2_tau1    = new TH1F("h_ak80_tau2_tau1" ,"#tau_{2}/#tau_{1}(leading AK8_Jet)", 50,0,1);
   TH1F *h_ak81_tau2_tau1    = new TH1F("h_ak81_tau2_tau1" ,"#tau_{2}/#tau_{1}(2nd leading AK8_Jet)", 50,0,1);
+  TH1F *inv_M_HH	    = new TH1F("inv_M_HH"     , "Inv_Mass of 4 SubJets", 100, 0, 2000);
 
   h_cutflow->GetXaxis()->SetBinLabel(1 ,"All");
   h_cutflow->GetXaxis()->SetBinLabel(2 ,"AK8Pt");
@@ -118,7 +120,7 @@ void SubJetSoftDropped_DM(const int pu)
   h_cutflow->GetXaxis()->SetBinLabel(5 ,"AK8#tau_{21}");
   h_cutflow->GetXaxis()->SetBinLabel(6 ,"AK8SubjetBTag");
 
-  float total_events =0 ,num1 =0, num2=0, num3=0, num4=0, num5=0,num6=0,total_events_AK4=0,num7=0,num8=0,num9=0,num10=0,num11=0;
+  float total_events =0 ,num1 =0, num2=0, num3=0, num4=0, num5=0,num6=0,total_events_AK4=0,num7=0,num8=0,num9=0,num10=0,num11=0,w_4b=0.;
   // Loop over all events
   for(Int_t entry = 0; entry < numberOfEntries; ++entry)
   {
@@ -127,7 +129,6 @@ void SubJetSoftDropped_DM(const int pu)
 
     ++total_events;
     h_cutflow->Fill(1);
-
     // If event contains at least 2 jets
     if(branchJetAK8->GetEntries() >= 2)
     {
@@ -152,13 +153,13 @@ void SubJetSoftDropped_DM(const int pu)
 
       float tau1_2(ak8jet1->Tau[0]);
       float tau2_2(ak8jet1->Tau[1]);
-
       int nsjBTagged = 
         int(isBTagged(p4_sj0_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu, 5)) + 
         int(isBTagged(p4_sj0_ak8jet1.Pt(), p4_sj0_ak8jet0.Eta(), pu, 5)) + 
         int(isBTagged(p4_sj1_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu, 5)) + 
         int(isBTagged(p4_sj1_ak8jet1.Pt(), p4_sj0_ak8jet0.Eta(), pu, 5)) ; 
-
+      w_4b = getEff_b(p4_sj0_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu)*getEff_b(p4_sj0_ak8jet1.Pt(), p4_sj0_ak8jet0.Eta(), pu)*getEff_b(p4_sj1_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu)*getEff_b(p4_sj1_ak8jet1.Pt(), p4_sj0_ak8jet0.Eta(), pu);
+      cout << "w_4b=" << w_4b;
       h_ak80pt->Fill(p4_ak8jet0.Pt());
       h_ak80pt->SetYTitle("Events");
       h_ak80pt->SetXTitle("p_{T},[GeV/c]");
@@ -267,9 +268,9 @@ void SubJetSoftDropped_DM(const int pu)
               NSubJet_fatjet2->SetLineWidth(3);
 
 	      
-
-              if(nsjBTagged >= 3){    //////////////// selection cut of b-tagging for subjets///////
-                ++num6;
+              cout << "nsjBTagged" << nsjBTagged <<endl;
+            //  if(nsjBTagged >= 3){    //////////////// selection cut of b-tagging for subjets///////
+             //   ++num6;
                 h_cutflow->Fill(6);
                 M_SubJets_fatjet1->Fill((p4_sj0_ak8jet0+p4_sj1_ak8jet0).M());
                 M_SubJets_fatjet1->SetYTitle("Events");
@@ -280,10 +281,15 @@ void SubJetSoftDropped_DM(const int pu)
                 M_SubJets_fatjet2->SetYTitle("Events");
                 M_SubJets_fatjet2->SetXTitle("inv_mass,[GeV]");
                 M_SubJets_fatjet2->SetLineWidth(3);
+                 
+                inv_M_HH->Fill((p4_sj0_ak8jet0+p4_sj1_ak8jet0+p4_sj0_ak8jet1+p4_sj1_ak8jet1).M(), w_4b);
+                inv_M_HH->SetYTitle("Events");
+                inv_M_HH->SetXTitle("M_{HH},[GeV]");
+                inv_M_HH->SetLineWidth(3);
 
                           h_cutflow->Fill(7); 
 
-              } //// AK8 jet subjet b-tagging 
+              //} //// AK8 jet subjet b-tagging 
             } //// AK8 jet tau21
           } /// AK8 jet soft drop mass
         } //// AK8 jet eta
@@ -339,7 +345,8 @@ void SubJetSoftDropped_DM(const int pu)
   c->SaveAs("MyHistos/h_ak80_tau2_tau1.png");
   h_ak81_tau2_tau1->Draw();
   c->SaveAs("MyHistos/h_ak81_tau2_tau1.png");
-  
+  inv_M_HH->Draw();
+  c->SaveAs("MyHistos/inv_M_HH.png");  
   delete c; 
 
   h_cutflow->Scale(1./h_cutflow->GetBinContent(1)); 
