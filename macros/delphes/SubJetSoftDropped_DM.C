@@ -73,7 +73,7 @@ void SubJetSoftDropped_DM(const int pu)
   TString file[60]={"root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_5.root"};
   // Create chain of root trees
     TChain chain("Delphes");
-    for(int i=0; i<1; i++){
+    for(int i=0; i<9; i++){
     chain.Add(file[i]);
   // Create object of class ExRootTreeReader
   ExRootTreeReader *treeReader = new ExRootTreeReader(&chain);
@@ -83,42 +83,45 @@ void SubJetSoftDropped_DM(const int pu)
   TClonesArray *branchJetAK8 = treeReader->UseBranch("JetPUPPIAK8"); ////DM changing to PUPPIAK8 jets
   TClonesArray *branchJetAK4 = treeReader->UseBranch("JetPUPPI"); ////DM AK4 jets for VBF tagging
 
-  TFile* fout = new TFile("output.root", "RECREATE");
+  TFile* fout = new TFile("output_1.root", "RECREATE");
   fout->cd();
 
   // Book histograms
-  TH1F *h_cutflow           = new TH1F("h_cutflow"          , "", 11, 0.5, 11.5);
-  TH1F *h_ak80pt            = new TH1F("h_ak80pt"        , "p_{T} of leading AK8_Jet",100,0,3000);
-  TH1F *h_ak81pt            = new TH1F("h_ak81pt"        , "p_{T} of 2nd leading AK8_Jet",100,0,3000);
-  TH1F *h_ak80eta           = new TH1F("h_ak80eta"       , "#eta of leading AK8_Jet", 40, -4, 4);
-  TH1F *h_ak81eta           = new TH1F("h_ak81eta"       , "#eta of 2nd leading AK8_Jet", 40, -4, 4);
-  TH1F *h_sdmass_ak80       = new TH1F("h_sdmass_ak80"        , ";M_{soft drop} of leading AK8_Jet;[GeV];", 100, 0, 200);
-  TH1F *h_sdmass_ak81       = new TH1F("h_sdmass_ak81"        , ";M_{soft drop} of 2nd leading AK8_Jet;[GeV];", 100, 0, 200);
-  TH1F *Minv_fatjet1        = new TH1F("Minv_fatjet1"       , ";Mass of leading AK8_Jet;[GeV];", 100, 0, 200);
-  TH1F *Minv_fatjet2        = new TH1F("Minv_fatjet2"       , ";Mass of 2nd leading AK8_Jet;[GeV];", 100, 0, 200);
-  TH1F *eta_SubJet1_fatjet1 = new TH1F("eta_SubJet1_fatjet1","#eta of SubJet_1 (leading AK8_Jet)",40,-4 ,4);
-  TH1F *eta_SubJet2_fatjet1 = new TH1F("eta_SubJet2_fatjet1","#eta of SubJet_2 (leading AK8_Jet)",40,-4 ,4);
-  TH1F *eta_SubJet1_fatjet2 = new TH1F("eta_SubJet1_fatjet2","#eta of SubJet_1 (2nd leading AK8_Jet)",40,-4 ,4);
-  TH1F *eta_SubJet2_fatjet2 = new TH1F("eta_SubJet2_fatjet2","#eta of SubJet_2 (2nd leading AK8_Jet",40,-4 ,4);
-  TH1F *pt_SubJet1_fatjet1  = new TH1F("pt_SubJet1_fatjet1" ,"p_{T} of SubJet_1 (leading AK8_Jet)",100,0,1000);
-  TH1F *pt_SubJet2_fatjet1  = new TH1F("pt_SubJet2_fatjet1" ,"p_{T} of SubJet_2 (leading AK8_Jet)",100,0,1000);
-  TH1F *pt_SubJet1_fatjet2  = new TH1F("pt_SubJet1_fatjet2" ,"p_{T} of SubJet_1 (2nd leading AK8_Jet)",100,0,1000);
-  TH1F *pt_SubJet2_fatjet2  = new TH1F("pt_SubJet2_fatjet2" ,"p_{T} of SubJet_2 (2nd leading AK8_Jet",100,0,1000);
+  TH1F *h_cutflow           = new TH1F("h_cutflow"          , "", 7, 0.5, 7.5);
+  TH1D *h_nak8		    = new TH1D("h_nak8"         ,";N(AK8) [GeV]; Events;;" ,11   ,-0.5  ,10.5 );
+  TH1F *h_ak80pt            = new TH1F("h_ak80pt"        , ";p_{T} leading AK8_Jet;Events;;",300,0,3000);
+  TH1F *h_ak81pt            = new TH1F("h_ak81pt"        , ";p_{T} 2nd leading AK8_Jet;Events;;",300,0,3000);
+  TH1F *h_ak80eta           = new TH1F("h_ak80eta"       , ";#eta leading AK8_Jet;Events;;", 200, -5, 5);
+  TH1F *h_ak81eta           = new TH1F("h_ak81eta"       , ";#eta 2nd leading AK8_Jet;Events;;", 200, -5, 5);
+  TH1F *h_sdmass_ak80       = new TH1F("h_sdmass_ak80"        , ";M_{soft drop}leading AK8_Jet[GeV];Events;;", 100, 0, 200);
+  TH1F *h_sdmass_ak81       = new TH1F("h_sdmass_ak81"        , ";M_{soft drop}2nd leading AK8_Jet[GeV];Events;;", 100, 0, 200);
+  TH1F *Minv_fatjet1        = new TH1F("Minv_fatjet1"       , ";Mass of leading AK8_Jet[GeV];Events;;", 100, 0, 200);
+  TH1F *Minv_fatjet2        = new TH1F("Minv_fatjet2"       , ";Mass of 2nd leading AK8_Jet[GeV];Events;;", 100, 0, 200);
+  TH1F *eta_SubJet1_fatjet1 = new TH1F("h_sj00_eta",";#eta SubJet_1 (leading AK8_Jet);Events;;",200,-5 ,5);
+  TH1F *eta_SubJet2_fatjet1 = new TH1F("h_sj10_eta",";#eta SubJet_2 (leading AK8_Jet);Events;;",200,-5 ,5);
+  TH1F *eta_SubJet1_fatjet2 = new TH1F("h_sj01_eta",";#eta SubJet_1 (2nd leading AK8_Jet);Events;;",200,-5 ,5);
+  TH1F *eta_SubJet2_fatjet2 = new TH1F("h_sj11_eta",";#eta SubJet_2 (2nd leading AK8_Jet);Events;;",200,-5 ,5);
+  TH1F *pt_SubJet1_fatjet1  = new TH1F("h_sj00_pt" ,";p_{T}SubJet_1 (leading AK8_Jet);Events;;",100,0,1000);
+  TH1F *pt_SubJet2_fatjet1  = new TH1F("h_sj10_pt" ,";p_{T}SubJet_2 (leading AK8_Jet);Events;;",100,0,1000);
+  TH1F *pt_SubJet1_fatjet2  = new TH1F("h_sj01_pt" ,";p_{T}SubJet_1 (2nd leading AK8_Jet);Events;;",100,0,1000);
+  TH1F *pt_SubJet2_fatjet2  = new TH1F("h_sj11_pt" ,";p_{T}SubJet_2 (2nd leading AK8_Jet);Events;;",100,0,1000);
   TH1F *M_SubJets_fatjet1   = new TH1F("M_SubJets_fatjet1"  , "Inv_Mass of SubJets (leading AK8_jet)", 100, 0, 500);
   TH1F *M_SubJets_fatjet2   = new TH1F("M_SubJets_fatjet2"  , "Inv_Mass of SubJets (2nd leading AK8_Jet)", 100, 0, 500);
   TH1D *NSubJet_fatjet1     = new TH1D("NSubJet_fatjet1"    , "no. of SubJets(leading Jet)",5,0,5);
   TH1D *NSubJet_fatjet2     = new TH1D("NSubJet_fatjet2"    , "no. of SubJets(2nd leading Jet)",5,0,5);
-  TH1F *h_ak80_tau2_tau1    = new TH1F("h_ak80_tau2_tau1" ,"#tau_{2}/#tau_{1}(leading AK8_Jet)", 50,0,1);
-  TH1F *h_ak81_tau2_tau1    = new TH1F("h_ak81_tau2_tau1" ,"#tau_{2}/#tau_{1}(2nd leading AK8_Jet)", 50,0,1);
-  TH1F *inv_M_HH	    = new TH1F("inv_M_HH"     , "Inv_Mass of 4 SubJets", 100, 0, 2000);
+  TH1F *h_ak80_tau2_tau1    = new TH1F("h_ak80_t2byt1" ,";#tau_{2}/#tau_{1}(leading AK8_Jet);Events;;", 100,0,1);
+  TH1F *h_ak81_tau2_tau1    = new TH1F("h_ak81_t2byt1" ,";#tau_{2}/#tau_{1}(2nd leading AK8_Jet);Events;;", 100,0,1);
+  TH1F *inv_M_4b	    = new TH1F("h_mass_4sj"     , ";M(4b) [GeV]; Events;;", 100, 0, 2000);
+  TH1F *inv_M_HH_3b	    = new TH1F("h_mjj_3b"       , ";M(HH) [GeV]; Events;;", 100, 0, 2000);
+  TH1F *inv_M_HH_4b	    = new TH1F("h_mjj_4b"	, ";M(HH) [GeV]; Events;;", 100, 0, 2000);
 
   h_cutflow->GetXaxis()->SetBinLabel(1 ,"All");
-  h_cutflow->GetXaxis()->SetBinLabel(2 ,"AK8Pt");
-  h_cutflow->GetXaxis()->SetBinLabel(3 ,"AK8Eta");
-  h_cutflow->GetXaxis()->SetBinLabel(3 ,"AK8Eta");
-  h_cutflow->GetXaxis()->SetBinLabel(4 ,"AK8SDMass");
-  h_cutflow->GetXaxis()->SetBinLabel(5 ,"AK8#tau_{21}");
-  h_cutflow->GetXaxis()->SetBinLabel(6 ,"AK8SubjetBTag");
+  h_cutflow->GetXaxis()->SetBinLabel(2 ,"Pt");
+  h_cutflow->GetXaxis()->SetBinLabel(3 ,"Eta");
+  h_cutflow->GetXaxis()->SetBinLabel(4 ,"SDMass");
+  h_cutflow->GetXaxis()->SetBinLabel(5 ,"#tau_{21}");
+  h_cutflow->GetXaxis()->SetBinLabel(6 ,"SubjetBTag>2");
+  h_cutflow->GetXaxis()->SetBinLabel(7 ,"SubjetBTag>3");
 
   float total_events =0 ,num1 =0, num2=0, num3=0, num4=0, num5=0,num6=0,total_events_AK4=0,num7=0,num8=0,num9=0,num10=0,num11=0,w_4b=0.;
   // Loop over all events
@@ -158,8 +161,8 @@ void SubJetSoftDropped_DM(const int pu)
         int(isBTagged(p4_sj0_ak8jet1.Pt(), p4_sj0_ak8jet0.Eta(), pu, 5)) + 
         int(isBTagged(p4_sj1_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu, 5)) + 
         int(isBTagged(p4_sj1_ak8jet1.Pt(), p4_sj0_ak8jet0.Eta(), pu, 5)) ; 
-      w_4b = getEff_b(p4_sj0_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu)*getEff_b(p4_sj0_ak8jet1.Pt(), p4_sj0_ak8jet0.Eta(), pu)*getEff_b(p4_sj1_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu)*getEff_b(p4_sj1_ak8jet1.Pt(), p4_sj0_ak8jet0.Eta(), pu);
-      cout << "w_4b=" << w_4b;
+       //w_4b = getEff_b(p4_sj0_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu)*getEff_b(p4_sj0_ak8jet1.Pt(), p4_sj0_ak8jet0.Eta(), pu)*getEff_b(p4_sj1_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu)*getEff_b(p4_sj1_ak8jet1.Pt(), p4_sj0_ak8jet0.Eta(), pu);
+      //cout << "w_4b=" << w_4b;
       h_ak80pt->Fill(p4_ak8jet0.Pt());
       h_ak80pt->SetYTitle("Events");
       h_ak80pt->SetXTitle("p_{T},[GeV/c]");
@@ -269,27 +272,26 @@ void SubJetSoftDropped_DM(const int pu)
 
 	      
               cout << "nsjBTagged" << nsjBTagged <<endl;
-            //  if(nsjBTagged >= 3){    //////////////// selection cut of b-tagging for subjets///////
-             //   ++num6;
+              if(nsjBTagged ==3){    //////////////// selection cut of b-tagging for subjets///////
+                ++num6;
                 h_cutflow->Fill(6);
-                M_SubJets_fatjet1->Fill((p4_sj0_ak8jet0+p4_sj1_ak8jet0).M());
-                M_SubJets_fatjet1->SetYTitle("Events");
-                M_SubJets_fatjet1->SetXTitle("inv_mass,[GeV]");
-                M_SubJets_fatjet1->SetLineWidth(3);
+                inv_M_HH_3b->Fill((p4_ak8jet0+p4_ak8jet1).M());
+                inv_M_HH_3b->SetYTitle("Events");
+                inv_M_HH_3b->SetXTitle("M_{HH},[GeV]");
+                inv_M_HH_3b->SetLineWidth(3);
 
-                M_SubJets_fatjet2->Fill((p4_sj0_ak8jet1+p4_sj1_ak8jet1).M());
-                M_SubJets_fatjet2->SetYTitle("Events");
-                M_SubJets_fatjet2->SetXTitle("inv_mass,[GeV]");
-                M_SubJets_fatjet2->SetLineWidth(3);
-                 
-                inv_M_HH->Fill((p4_sj0_ak8jet0+p4_sj1_ak8jet0+p4_sj0_ak8jet1+p4_sj1_ak8jet1).M(), w_4b);
-                inv_M_HH->SetYTitle("Events");
-                inv_M_HH->SetXTitle("M_{HH},[GeV]");
-                inv_M_HH->SetLineWidth(3);
 
-                          h_cutflow->Fill(7); 
+              } //// AK8 jet subjet b-tagging 
+            if(nsjBTagged ==4){    //////////////// selection cut of b-tagging for subjets///////
+                ++num7;
+                h_cutflow->Fill(7);
+                inv_M_HH_4b->Fill((p4_ak8jet0+p4_ak8jet1).M());
+                inv_M_HH_4b->SetYTitle("Events");
+                inv_M_HH_4b->SetXTitle("M_{HH},[GeV]");
+                inv_M_HH_4b->SetLineWidth(3);
 
-              //} //// AK8 jet subjet b-tagging 
+
+              } //// AK8 jet subjet b-tagging
             } //// AK8 jet tau21
           } /// AK8 jet soft drop mass
         } //// AK8 jet eta
@@ -345,8 +347,10 @@ void SubJetSoftDropped_DM(const int pu)
   c->SaveAs("MyHistos/h_ak80_tau2_tau1.png");
   h_ak81_tau2_tau1->Draw();
   c->SaveAs("MyHistos/h_ak81_tau2_tau1.png");
-  inv_M_HH->Draw();
-  c->SaveAs("MyHistos/inv_M_HH.png");  
+  inv_M_HH_3b->Draw();
+  c->SaveAs("MyHistos/inv_M_HH_3b.png");
+  inv_M_HH_4b->Draw();
+  c->SaveAs("MyHistos/inv_M_HH_4b.png");  
   delete c; 
 
   h_cutflow->Scale(1./h_cutflow->GetBinContent(1)); 
