@@ -70,11 +70,13 @@ void SubJetSoftDropped_DM(const int pu)
 {
   gSystem->Load("libDelphes");
   
-  TString file[60]={"root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_5.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_0.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_1.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_2.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_3.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_4.root","root://cmseos.fnal.gov//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_5.root"};
+  TString file[60]={"root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_2.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_3.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_4.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_1_5.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_2.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_3.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_4.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_2_5.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_2.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_3.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_4.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_3_5.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_2.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_3.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_4.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_4_5.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_2.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_3.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_4.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_5_5.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_2.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_6_3.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_2.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_3.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_4.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_7_5.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_2.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_3.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_4.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_8_5.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_2.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_3.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_4.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_SM_14TeV-madgraph_200PU/GluGluToHHTo4B_node_SM_14TeV-madgraph_9_5.root"};
+  TString file_nd2[60]={"root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_1_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_1_2.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_1_3.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_1_5.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_2_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_2_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_2_2.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_2_3.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_3_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_3_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_3_2.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_4_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_4_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_4_4.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_4_5.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_5_5.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_6_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_6_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_6_3.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_6_5.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_7_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_7_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_7_2.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_7_3.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_7_4.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_7_5.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_8_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_8_3.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_8_5.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_9_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_9_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_9_2.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_9_3.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_9_4.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_9_5.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_10_0.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_10_1.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_10_4.root","root://cms-xrd-global.cern.ch//store/user/snowmass/noreplica/YR_Delphes_prod-luca-split/Delphes342pre14_split/GluGluToHHTo4B_node_2_14TeV-madgraph_200PU/GluGluToHHTo4B_node_2_14TeV-madgraph_10_5.root"};
   // Create chain of root trees
     TChain chain("Delphes");
     for(int i=0; i<9; i++){
     chain.Add(file[i]);
+    cout << "now processing " << file[i] << endl;
   // Create object of class ExRootTreeReader
   ExRootTreeReader *treeReader = new ExRootTreeReader(&chain);
   Int_t numberOfEntries = treeReader->GetEntries();
@@ -87,7 +89,8 @@ void SubJetSoftDropped_DM(const int pu)
   fout->cd();
 
   // Book histograms
-  TH1F *h_cutflow           = new TH1F("h_cutflow"          , "", 7, 0.5, 7.5);
+  TH1F *h_cutflow           = new TH1F("h_cutflow"          , "", 9, 0.5, 9.5);
+  TH1F *h_events            = new TH1F("h_events"           , "", 9, 0.5, 9.5);
   TH1D *h_nak8		    = new TH1D("h_nak8"         ,";N(AK8) [GeV]; Events;;" ,11   ,-0.5  ,10.5 );
   TH1F *h_ak80pt            = new TH1F("h_ak80pt"        , ";p_{T} leading AK8_Jet;Events;;",300,0,3000);
   TH1F *h_ak81pt            = new TH1F("h_ak81pt"        , ";p_{T} 2nd leading AK8_Jet;Events;;",300,0,3000);
@@ -114,14 +117,28 @@ void SubJetSoftDropped_DM(const int pu)
   TH1F *inv_M_4b	    = new TH1F("h_mass_4sj"     , ";M(4b) [GeV]; Events;;", 100, 0, 2000);
   TH1F *inv_M_HH_3b	    = new TH1F("h_mjj_3b"       , ";M(HH) [GeV]; Events;;", 100, 0, 2000);
   TH1F *inv_M_HH_4b	    = new TH1F("h_mjj_4b"	, ";M(HH) [GeV]; Events;;", 100, 0, 2000);
-
+  TH2F *t21_j1_j2	    = new TH2F("t21_j1_j2"	, ";t21(J1);t21(J2);;", 10, 0., 1., 10, 0., 1.);
+  TH2F *t21_j1_j2_sdcut     = new TH2F("t21_j1_j2_sdcut", ";t21(J1);t21(J2);;", 10, 0., 1., 10, 0., 1.);
+  
   h_cutflow->GetXaxis()->SetBinLabel(1 ,"All");
-  h_cutflow->GetXaxis()->SetBinLabel(2 ,"Pt");
-  h_cutflow->GetXaxis()->SetBinLabel(3 ,"Eta");
-  h_cutflow->GetXaxis()->SetBinLabel(4 ,"SDMass");
+  h_cutflow->GetXaxis()->SetBinLabel(2 ,"AK8>1");
+  h_cutflow->GetXaxis()->SetBinLabel(3 ,"p_{T}");
+  h_cutflow->GetXaxis()->SetBinLabel(4 ,"#eta");
   h_cutflow->GetXaxis()->SetBinLabel(5 ,"#tau_{21}");
-  h_cutflow->GetXaxis()->SetBinLabel(6 ,"SubjetBTag>2");
-  h_cutflow->GetXaxis()->SetBinLabel(7 ,"SubjetBTag>3");
+  h_cutflow->GetXaxis()->SetBinLabel(6 ,"M(J)");
+  h_cutflow->GetXaxis()->SetBinLabel(7 ,"sjBTag>1");
+  h_cutflow->GetXaxis()->SetBinLabel(8 ,"sjBTag>2");
+  h_cutflow->GetXaxis()->SetBinLabel(9 ,"sjBTag>3");
+  
+  h_events->GetXaxis()->SetBinLabel(1 ,"All");
+  h_events->GetXaxis()->SetBinLabel(2 ,"AK8>1");
+  h_events->GetXaxis()->SetBinLabel(3 ,"p_{T}");
+  h_events->GetXaxis()->SetBinLabel(4 ,"#eta");
+  h_events->GetXaxis()->SetBinLabel(5 ,"#tau_{21}");
+  h_events->GetXaxis()->SetBinLabel(6 ,"#M(J)");
+  h_events->GetXaxis()->SetBinLabel(7 ,"sjBTag>1");
+  h_events->GetXaxis()->SetBinLabel(8 ,"sjBTag>2");
+  h_events->GetXaxis()->SetBinLabel(9 ,"sjBTag>3");
 
   float total_events =0 ,num1 =0, num2=0, num3=0, num4=0, num5=0,num6=0,total_events_AK4=0,num7=0,num8=0,num9=0,num10=0,num11=0,w_4b=0.;
   // Loop over all events
@@ -132,10 +149,12 @@ void SubJetSoftDropped_DM(const int pu)
 
     ++total_events;
     h_cutflow->Fill(1);
+    h_events->Fill(1);
     // If event contains at least 2 jets
     if(branchJetAK8->GetEntries() >= 2)
     {
-
+     h_cutflow->Fill(2);
+     h_events->Fill(2);
       Jet *ak8jet0 = (Jet*) branchJetAK8->At(0);
       Jet *ak8jet1 = (Jet*) branchJetAK8->At(1);
 
@@ -156,13 +175,22 @@ void SubJetSoftDropped_DM(const int pu)
 
       float tau1_2(ak8jet1->Tau[0]);
       float tau2_2(ak8jet1->Tau[1]);
-      int nsjBTagged = 
-        int(isBTagged(p4_sj0_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu, 5)) + 
-        int(isBTagged(p4_sj0_ak8jet1.Pt(), p4_sj0_ak8jet0.Eta(), pu, 5)) + 
-        int(isBTagged(p4_sj1_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu, 5)) + 
-        int(isBTagged(p4_sj1_ak8jet1.Pt(), p4_sj0_ak8jet0.Eta(), pu, 5)) ; 
-       //w_4b = getEff_b(p4_sj0_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu)*getEff_b(p4_sj0_ak8jet1.Pt(), p4_sj0_ak8jet0.Eta(), pu)*getEff_b(p4_sj1_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu)*getEff_b(p4_sj1_ak8jet1.Pt(), p4_sj0_ak8jet0.Eta(), pu);
-      //cout << "w_4b=" << w_4b;
+      int sj00BTagged =  int(isBTagged(p4_sj0_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu, 5));
+      int sj10BTagged =  int(isBTagged(p4_sj1_ak8jet0.Pt(), p4_sj1_ak8jet0.Eta(), pu, 5));
+      int sj01BTagged =  int(isBTagged(p4_sj0_ak8jet1.Pt(), p4_sj0_ak8jet1.Eta(), pu, 5));
+      int sj11BTagged =  int(isBTagged(p4_sj1_ak8jet1.Pt(), p4_sj1_ak8jet1.Eta(), pu, 5));
+      
+      int btag_01 = sj00BTagged || sj10BTagged;  
+      int btag_11 = sj01BTagged || sj11BTagged;
+      int btag_02 = sj00BTagged && sj10BTagged;
+      int btag_12 = sj01BTagged	&& sj11BTagged;
+
+      int two_btagged = btag_01 && btag_11;
+      int three_btagged_1 = btag_02 && btag_11;
+      int three_btagged_2 = btag_12 && btag_01;
+      int three_btagged = three_btagged_1 || three_btagged_2;
+      int four_btagged  = btag_02 && btag_12;
+      
       h_ak80pt->Fill(p4_ak8jet0.Pt());
       h_ak80pt->SetYTitle("Events");
       h_ak80pt->SetXTitle("p_{T},[GeV/c]");
@@ -173,10 +201,13 @@ void SubJetSoftDropped_DM(const int pu)
       h_ak81pt->SetXTitle("p_{T},[GeV/c]");
       h_ak81pt->SetLineWidth(3);
 
+
       //// Starting selections on AK8 jets 
       if( p4_ak8jet0.Pt() > 300 && p4_ak8jet1.Pt() > 300 ){
         ++num1; 
-        h_cutflow->Fill(2);
+        h_cutflow->Fill(3);
+	h_events->Fill(3);
+        
         h_ak80eta->Fill(p4_ak8jet0.Eta());
         h_ak80eta->SetYTitle("Events");
         h_ak80eta->SetXTitle("#eta");
@@ -189,38 +220,42 @@ void SubJetSoftDropped_DM(const int pu)
 
         if( abs(ak8jet0->Eta)<3 &&  abs(ak8jet1->Eta)<3 ){
           ++num2;
-          h_cutflow->Fill(3);
-          h_sdmass_ak80->Fill(p4_ak8jet0.M());
-          h_sdmass_ak80->SetYTitle("Events");
-          h_sdmass_ak80->SetXTitle("inv_mass,[GeV]");
-          h_sdmass_ak80->SetLineWidth(3);
-          h_sdmass_ak81->Fill(p4_ak8jet1.M());
-          h_sdmass_ak81->SetYTitle("Events");
-          h_sdmass_ak81->SetXTitle("inv_mass,[GeV]");
-          h_sdmass_ak81->SetLineWidth(3);
-          Minv_fatjet1->Fill(ak8jet0->Mass);
-          Minv_fatjet2->Fill(ak8jet1->Mass);
+          h_cutflow->Fill(4);
+	  h_events->Fill(4);
+         
+          h_ak80_tau2_tau1->Fill(1.0*tau2_1/tau1_1);
+          h_ak80_tau2_tau1->SetYTitle("Events");
+          h_ak80_tau2_tau1->SetXTitle("#tau_{2}/#tau_{1}");
+          h_ak80_tau2_tau1->SetLineWidth(3);
 
-	 
+          h_ak81_tau2_tau1->Fill(1.0*tau2_2/tau1_2);
+          h_ak81_tau2_tau1->SetYTitle("Events");
+          h_ak81_tau2_tau1->SetXTitle("#tau_{2}/#tau_{1}");
+          h_ak81_tau2_tau1->SetLineWidth(3);
 
-          if( p4_ak8jet0.M() > 90 && p4_ak8jet0.M() < 140 &&
-              p4_ak8jet1.M() > 90 &&  p4_ak8jet1.M() < 140 ){
+          if(tau2_1/tau1_1 < 0.6 && tau2_2/tau1_2 < 0.6){
             ++num4;
-            h_cutflow->Fill(4);
-            h_ak80_tau2_tau1->Fill(1.0*tau2_1/tau1_1);
-            h_ak80_tau2_tau1->SetYTitle("Events");
-            h_ak80_tau2_tau1->SetXTitle("#tau_{2}/#tau_{1}");
-            h_ak80_tau2_tau1->SetLineWidth(3);
+            h_cutflow->Fill(5);
+	    h_events->Fill(5);
+	
+	    h_sdmass_ak80->Fill(p4_ak8jet0.M());
+            h_sdmass_ak80->SetYTitle("Events");
+            h_sdmass_ak80->SetXTitle("inv_mass,[GeV]");
+            h_sdmass_ak80->SetLineWidth(3);
+            h_sdmass_ak81->Fill(p4_ak8jet1.M());
+            h_sdmass_ak81->SetYTitle("Events");
+            h_sdmass_ak81->SetXTitle("inv_mass,[GeV]");
+            h_sdmass_ak81->SetLineWidth(3);
+            Minv_fatjet1->Fill(ak8jet0->Mass);
+            Minv_fatjet2->Fill(ak8jet1->Mass);
 
-            h_ak81_tau2_tau1->Fill(1.0*tau2_2/tau1_2);
-            h_ak81_tau2_tau1->SetYTitle("Events");
-            h_ak81_tau2_tau1->SetXTitle("#tau_{2}/#tau_{1}");
-            h_ak81_tau2_tau1->SetLineWidth(3);
-
-            if(tau2_1/tau1_1 < 0.6 && tau2_2/tau1_2 < 0.6){
+	    if( p4_ak8jet0.M() > 90 && p4_ak8jet0.M() < 140 &&
+              p4_ak8jet1.M() > 90 &&  p4_ak8jet1.M() < 140 ){
               ++num5;
-              h_cutflow->Fill(5);
-              eta_SubJet1_fatjet1->Fill(p4_sj0_ak8jet0.Eta());
+              h_cutflow->Fill(6);
+	      h_events->Fill(6);
+
+	      eta_SubJet1_fatjet1->Fill(p4_sj0_ak8jet0.Eta());
               eta_SubJet1_fatjet1->SetYTitle("Events");
               eta_SubJet1_fatjet1->SetXTitle("#eta");
               eta_SubJet1_fatjet1->SetLineWidth(3);
@@ -269,29 +304,31 @@ void SubJetSoftDropped_DM(const int pu)
               NSubJet_fatjet2->SetYTitle("Events");
               NSubJet_fatjet2->SetXTitle("no. of subjets");
               NSubJet_fatjet2->SetLineWidth(3);
-
 	      
-              cout << "nsjBTagged" << nsjBTagged <<endl;
-              if(nsjBTagged ==3){    //////////////// selection cut of b-tagging for subjets///////
-                ++num6;
-                h_cutflow->Fill(6);
-                inv_M_HH_3b->Fill((p4_ak8jet0+p4_ak8jet1).M());
-                inv_M_HH_3b->SetYTitle("Events");
-                inv_M_HH_3b->SetXTitle("M_{HH},[GeV]");
-                inv_M_HH_3b->SetLineWidth(3);
+	       	
+ 	      if(two_btagged == 1){
+		   h_cutflow->Fill(7);
+		   h_events->Fill(7);
 
+                   if(three_btagged == 1){
+		     h_cutflow->Fill(8);
+		     h_events->Fill(8);
+                     inv_M_HH_3b->Fill((p4_ak8jet0+p4_ak8jet1).M());
+                     inv_M_HH_3b->SetYTitle("Events");
+                     inv_M_HH_3b->SetXTitle("M_{HH},[GeV]");
+                     inv_M_HH_3b->SetLineWidth(3);
 
-              } //// AK8 jet subjet b-tagging 
-            if(nsjBTagged ==4){    //////////////// selection cut of b-tagging for subjets///////
-                ++num7;
-                h_cutflow->Fill(7);
-                inv_M_HH_4b->Fill((p4_ak8jet0+p4_ak8jet1).M());
-                inv_M_HH_4b->SetYTitle("Events");
-                inv_M_HH_4b->SetXTitle("M_{HH},[GeV]");
-                inv_M_HH_4b->SetLineWidth(3);
-
-
-              } //// AK8 jet subjet b-tagging
+		     if(four_btagged==1){ 
+		       h_cutflow->Fill(9);
+		       h_events->Fill(9);
+   		       inv_M_HH_4b->Fill((p4_ak8jet0+p4_ak8jet1).M());
+                       inv_M_HH_4b->SetYTitle("Events");
+                       inv_M_HH_4b->SetXTitle("M_{HH},[GeV]");
+                       inv_M_HH_4b->SetLineWidth(3);
+		    }
+		  }
+                }
+             // } //// AK8 jet subjet b-tagging
             } //// AK8 jet tau21
           } /// AK8 jet soft drop mass
         } //// AK8 jet eta
@@ -299,7 +336,7 @@ void SubJetSoftDropped_DM(const int pu)
     } //// Start Higgs jet selections
 
   } //// End event loop 
-
+ 
 
   TString newdir = "mkdir -p MyHistos" ;
   system(newdir);
@@ -352,11 +389,11 @@ void SubJetSoftDropped_DM(const int pu)
   inv_M_HH_4b->Draw();
   c->SaveAs("MyHistos/inv_M_HH_4b.png");  
   delete c; 
-
+  cout << "events in cutflow first bin==" << h_cutflow->GetBinContent(1) << endl;
   h_cutflow->Scale(1./h_cutflow->GetBinContent(1)); 
-
   fout->cd();
   fout->Write();
   fout->Close();
- } 
+  cout << "total_events==" << total_events << endl;
+ }  
 }
