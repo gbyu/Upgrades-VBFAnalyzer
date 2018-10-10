@@ -66,7 +66,7 @@ bool isBTagged(const double pt, const double eta, const int pu, const int fl=5) 
 
 //------------------------------------------------------------------------------
 
-void SubJetSoftDropped_QCD_1(const int pu, const int nmin, const int nmax, const char *output)
+void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const char *output)
 {
   gSystem->Load("libDelphes");
   
