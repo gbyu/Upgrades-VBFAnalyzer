@@ -24,8 +24,6 @@ using namespace std;
     if (ptin > 3000.) ptin = 2999.99;
 
     TFile f("effs/beff_200PU_WPM.root");
-   // if ( f.IsOpen() ) printf("File opened successfully\n");
-    //f.ls();
     TH1F *heff = (TH1F*)f.Get("heff");
     int x_range=(heff->GetNbinsX());
     int y_range=(heff->GetNbinsY());
@@ -39,7 +37,64 @@ using namespace std;
            if (eta <= etain && etain < (eta+etawidth)){
            
            eff=heff->GetBinContent(i,j);
-           //cout<<"test1....."<<eff<<endl;
+          }
+        }
+      }
+    }
+  return eff; 
+  
+}
+
+double getEff_c(double ptin, double etain, const int pu) {
+
+    double pt=0.,eta=0.,ptwidth=0.,etawidth=0.,eff=0.; 
+    
+    etain = abs(etain);
+    if (ptin > 3000.) ptin = 2999.99;
+
+    TFile f("effs/ceff_200PU_WPM.root");
+    TH1F *heff = (TH1F*)f.Get("heff");
+    int x_range=(heff->GetNbinsX());
+    int y_range=(heff->GetNbinsY());
+    for(int i=1; i < x_range+1; i++){
+       for(int j=1; j < y_range+1; j++){
+         pt       = heff->GetXaxis()->GetBinLowEdge(i);
+         eta      = heff->GetYaxis()->GetBinLowEdge(j);
+         ptwidth  = heff->GetXaxis()->GetBinWidth(i);
+         etawidth = heff->GetYaxis()->GetBinWidth(j);
+         if (pt <= ptin && ptin < (pt+ptwidth)){
+           if (eta <= etain && etain < (eta+etawidth)){
+           
+           eff=heff->GetBinContent(i,j);
+          }
+        }
+      }
+    }
+  return eff; 
+  
+}
+
+double getEff_l(double ptin, double etain, const int pu) {
+
+    double pt=0.,eta=0.,ptwidth=0.,etawidth=0.,eff=0.; 
+    
+    etain = abs(etain);
+    if (ptin > 3000.) ptin = 2999.99;
+
+    TFile f("effs/lighteff_200PU_WPM.root");
+    TH1F *heff = (TH1F*)f.Get("heff");
+    int x_range=(heff->GetNbinsX());
+    int y_range=(heff->GetNbinsY());
+    for(int i=1; i < x_range+1; i++){
+       for(int j=1; j < y_range+1; j++){
+         pt       = heff->GetXaxis()->GetBinLowEdge(i);
+         eta      = heff->GetYaxis()->GetBinLowEdge(j);
+         ptwidth  = heff->GetXaxis()->GetBinWidth(i);
+         etawidth = heff->GetYaxis()->GetBinWidth(j);
+         if (pt <= ptin && ptin < (pt+ptwidth)){
+           if (eta <= etain && etain < (eta+etawidth)){
+           
+           eff=heff->GetBinContent(i,j);
           }
         }
       }
@@ -49,7 +104,7 @@ using namespace std;
 }
 
 
-bool isBTagged(const double pt, const double eta, const int pu, const int fl=5) {
+bool isBTagged(const double pt, const double eta, const int pu, const int fl) {
   bool isBTagged(0);
 
   if (fl == 5) {
@@ -57,6 +112,21 @@ bool isBTagged(const double pt, const double eta, const int pu, const int fl=5) 
     double rand = r->Rndm();
     // std::cout << " pt = " << pt << " eta = " << eta << " eff = " << eff << " rand = " << rand << std::endl;
     if (eff > rand) isBTagged = 1;
+    else isBTagged = 0;
+  }
+  else if (fl == 4) {
+    double eff = getEff_c(pt, eta, pu);  
+    double rand = r->Rndm();
+    // std::cout << " pt = " << pt << " eta = " << eta << " eff = " << eff << " rand = " << rand << std::endl;
+    if (eff < rand) isBTagged = 1;
+    else isBTagged = 0;
+  }
+  else
+  {
+    double eff = getEff_l(pt, eta, pu);  
+    double rand = r->Rndm();
+    // std::cout << " pt = " << pt << " eta = " << eta << " eff = " << eff << " rand = " << rand << std::endl;
+    if (eff < rand) isBTagged = 1;
     else isBTagged = 0;
   }
 
@@ -122,6 +192,7 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
   TH2F *t21_j1_j2_sdcut     = new TH2F("t21_j1_j2_sdcut", ";t21(J1);t21(J2);;", 10, 0., 1., 10, 0., 1.);
   TH1F *M_HH_3b             = new TH1F("h_mjj_3b"       , ";M(HH) [GeV]; Events;;", 100, 0, 2000);
   TH1F *M_HH_4b             = new TH1F("h_mjj_4b"       , ";M(HH) [GeV]; Events;;", 100, 0, 2000);
+  TH1F *inv_M_qq            = new TH1F("h_mass_qq"     , ";#wedge{M}_{qq} [GeV]; Events;;", 100, 0, 2000);
 
   h_cutflow->GetXaxis()->SetBinLabel(1 ,"All");
   h_cutflow->GetXaxis()->SetBinLabel(2 ,"AK8>1");
@@ -196,10 +267,10 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
 
       float tau1_2(ak8jet1->Tau[0]);
       float tau2_2(ak8jet1->Tau[1]);
-      int sj00BTagged =  int(isBTagged(p4_sj0_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu, 5));
-      int sj10BTagged =  int(isBTagged(p4_sj1_ak8jet0.Pt(), p4_sj1_ak8jet0.Eta(), pu, 5));
-      int sj01BTagged =  int(isBTagged(p4_sj0_ak8jet1.Pt(), p4_sj0_ak8jet1.Eta(), pu, 5));
-      int sj11BTagged =  int(isBTagged(p4_sj1_ak8jet1.Pt(), p4_sj1_ak8jet1.Eta(), pu, 5));
+      int sj00BTagged =  int(isBTagged(p4_sj0_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu, 0));
+      int sj10BTagged =  int(isBTagged(p4_sj1_ak8jet0.Pt(), p4_sj1_ak8jet0.Eta(), pu, 0));
+      int sj01BTagged =  int(isBTagged(p4_sj0_ak8jet1.Pt(), p4_sj0_ak8jet1.Eta(), pu, 0));
+      int sj11BTagged =  int(isBTagged(p4_sj1_ak8jet1.Pt(), p4_sj1_ak8jet1.Eta(), pu, 0));
       
       int btag_01 = sj00BTagged || sj10BTagged;  
       int btag_11 = sj01BTagged || sj11BTagged;
@@ -340,8 +411,9 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
 		  h_cutflow->Fill(7);
 		  h_events->Fill(7);
 		  h_cutflow_2->Fill(7);
-	      
-	      //###### At least b-tagged jets #### 
+   		  inv_M_qq->Fill(genJetMomentum.M());
+	          
+	      //######  b-tagged jets #### 
 	      if(one_btagged == 1){
                 h_cutflow->Fill(8);       
                 h_events->Fill(8);
