@@ -192,39 +192,39 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
   TH2F *t21_j1_j2_sdcut     = new TH2F("t21_j1_j2_sdcut", ";t21(J1);t21(J2);;", 10, 0., 1., 10, 0., 1.);
   TH1F *M_HH_3b             = new TH1F("h_mjj_3b"       , ";M(HH) [GeV]; Events;;", 100, 0, 2000);
   TH1F *M_HH_4b             = new TH1F("h_mjj_4b"       , ";M(HH) [GeV]; Events;;", 100, 0, 2000);
-  TH1F *inv_M_qq            = new TH1F("h_mass_qq"     , ";#wedge{M}_{qq} [GeV]; Events;;", 100, 0, 2000);
+  TH1F *inv_M_qq            = new TH1F("h_mass_qq"     , ";#hat{M}_{qq} [GeV]; Events;;", 100, 0, 1000);
 
   h_cutflow->GetXaxis()->SetBinLabel(1 ,"All");
-  h_cutflow->GetXaxis()->SetBinLabel(2 ,"AK8>1");
-  h_cutflow->GetXaxis()->SetBinLabel(3 ,"p_{T}");
-  h_cutflow->GetXaxis()->SetBinLabel(4 ,"#eta");
-  h_cutflow->GetXaxis()->SetBinLabel(5 ,"#tau_{21}");
-  h_cutflow->GetXaxis()->SetBinLabel(6 ,"M(J)");
-  h_cutflow->GetXaxis()->SetBinLabel(7 ,"M_{partons}<1TeV");
+  h_cutflow->GetXaxis()->SetBinLabel(3 ,"AK8>1");
+  h_cutflow->GetXaxis()->SetBinLabel(4 ,"p_{T}");
+  h_cutflow->GetXaxis()->SetBinLabel(5 ,"#eta");
+  h_cutflow->GetXaxis()->SetBinLabel(6 ,"#tau_{21}");
+  h_cutflow->GetXaxis()->SetBinLabel(7 ,"M(J)");
+  h_cutflow->GetXaxis()->SetBinLabel(2 ,"M_{qq}");
   h_cutflow->GetXaxis()->SetBinLabel(8 ,"sjBTag>0");
   h_cutflow->GetXaxis()->SetBinLabel(9 ,"sjBTag>1");
   h_cutflow->GetXaxis()->SetBinLabel(10 ,"sjBTag>2");
   h_cutflow->GetXaxis()->SetBinLabel(11 ,"sjBTag>3");
 
   h_cutflow_2->GetXaxis()->SetBinLabel(1 ,"All");
-  h_cutflow_2->GetXaxis()->SetBinLabel(2 ,"AK8>1");
-  h_cutflow_2->GetXaxis()->SetBinLabel(3 ,"p_{T}");
-  h_cutflow_2->GetXaxis()->SetBinLabel(4 ,"#eta");
-  h_cutflow_2->GetXaxis()->SetBinLabel(5 ,"#tau_{21}");
-  h_cutflow_2->GetXaxis()->SetBinLabel(6 ,"M(J)");
-  h_cutflow_2->GetXaxis()->SetBinLabel(7 ,"M_{partons}<1TeV");
+  h_cutflow_2->GetXaxis()->SetBinLabel(3 ,"AK8>1");
+  h_cutflow_2->GetXaxis()->SetBinLabel(4 ,"p_{T}");
+  h_cutflow_2->GetXaxis()->SetBinLabel(5 ,"#eta");
+  h_cutflow_2->GetXaxis()->SetBinLabel(6 ,"#tau_{21}");
+  h_cutflow_2->GetXaxis()->SetBinLabel(7 ,"M(J)");
+  h_cutflow_2->GetXaxis()->SetBinLabel(2 ,"M_{qq}");
   h_cutflow_2->GetXaxis()->SetBinLabel(8 ,"sjBTag=1");
   h_cutflow_2->GetXaxis()->SetBinLabel(9 ,"sjBTag=2");
   h_cutflow_2->GetXaxis()->SetBinLabel(10 ,"sjBTag=3");
   h_cutflow_2->GetXaxis()->SetBinLabel(11 ,"sjBTag=4");
   
   h_events->GetXaxis()->SetBinLabel(1 ,"All");
-  h_events->GetXaxis()->SetBinLabel(2 ,"AK8>1");
-  h_events->GetXaxis()->SetBinLabel(3 ,"p_{T}");
-  h_events->GetXaxis()->SetBinLabel(4 ,"#eta");
-  h_events->GetXaxis()->SetBinLabel(5 ,"#tau_{21}");
-  h_events->GetXaxis()->SetBinLabel(6 ,"M(J)");
-  h_events->GetXaxis()->SetBinLabel(7 ,"M_{partons}<1TeV");
+  h_events->GetXaxis()->SetBinLabel(3 ,"AK8>1");
+  h_events->GetXaxis()->SetBinLabel(4 ,"p_{T}");
+  h_events->GetXaxis()->SetBinLabel(5 ,"#eta");
+  h_events->GetXaxis()->SetBinLabel(6 ,"#tau_{21}");
+  h_events->GetXaxis()->SetBinLabel(7 ,"M(J)");
+  h_events->GetXaxis()->SetBinLabel(2 ,"M_{qq}");
   h_events->GetXaxis()->SetBinLabel(8 ,"sjBTag>0");
   h_events->GetXaxis()->SetBinLabel(9 ,"sjBTag>1");
   h_events->GetXaxis()->SetBinLabel(10 ,"sjBTag>2");
@@ -235,18 +235,31 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
   for(Int_t entry = 0; entry < numberOfEntries; ++entry)
   {
     // Load selected branches with data from specified event
-    treeReader->ReadEntry(entry);
+  treeReader->ReadEntry(entry);
 
-    ++total_events;
-    h_cutflow->Fill(1);
-    h_events->Fill(1);
-    h_cutflow_2->Fill(1);
-    // If event contains at least 2 jets
-    if(branchJetAK8->GetEntries() >= 2)
-    {
+  ++total_events;
+  h_cutflow->Fill(1);
+  h_events->Fill(1);
+  h_cutflow_2->Fill(1);
+ 
+  //#### parton mass cut ######
+  if(branchParticle->GetEntries() >= 2){
+    particle1 = (GenParticle*) branchParticle->At(0);
+    particle2 = (GenParticle*) branchParticle->At(1);
+    genJetMomentum = particle1->P4()+particle2->P4();
+    if(genJetMomentum.M() < 1000.){
+      cout << "p1_status==" << particle1->Status << "and" << "p2_status==" << particle2->Status << endl;
       h_cutflow->Fill(2);
       h_events->Fill(2);
       h_cutflow_2->Fill(2);
+      inv_M_qq->Fill(genJetMomentum.M());
+   
+    // If event contains at least 2 jets
+    if(branchJetAK8->GetEntries() >= 2)
+    {
+      h_cutflow->Fill(3);
+      h_events->Fill(3);
+      h_cutflow_2->Fill(3);
       Jet *ak8jet0 = (Jet*) branchJetAK8->At(0);
       Jet *ak8jet1 = (Jet*) branchJetAK8->At(1);
 
@@ -267,10 +280,10 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
 
       float tau1_2(ak8jet1->Tau[0]);
       float tau2_2(ak8jet1->Tau[1]);
-      int sj00BTagged =  int(isBTagged(p4_sj0_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu, 0));
-      int sj10BTagged =  int(isBTagged(p4_sj1_ak8jet0.Pt(), p4_sj1_ak8jet0.Eta(), pu, 0));
-      int sj01BTagged =  int(isBTagged(p4_sj0_ak8jet1.Pt(), p4_sj0_ak8jet1.Eta(), pu, 0));
-      int sj11BTagged =  int(isBTagged(p4_sj1_ak8jet1.Pt(), p4_sj1_ak8jet1.Eta(), pu, 0));
+      int sj00BTagged =  int(isBTagged(p4_sj0_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu, 5));
+      int sj10BTagged =  int(isBTagged(p4_sj1_ak8jet0.Pt(), p4_sj1_ak8jet0.Eta(), pu, 5));
+      int sj01BTagged =  int(isBTagged(p4_sj0_ak8jet1.Pt(), p4_sj0_ak8jet1.Eta(), pu, 5));
+      int sj11BTagged =  int(isBTagged(p4_sj1_ak8jet1.Pt(), p4_sj1_ak8jet1.Eta(), pu, 5));
       
       int btag_01 = sj00BTagged || sj10BTagged;  
       int btag_11 = sj01BTagged || sj11BTagged;
@@ -298,9 +311,9 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
       //// Starting selections on AK8 jets 
       if( p4_ak8jet0.Pt() > 300 && p4_ak8jet1.Pt() > 300 ){
         ++num1; 
-        h_cutflow->Fill(3);
-	h_events->Fill(3);
-        h_cutflow_2->Fill(3);
+        h_cutflow->Fill(4);
+	h_events->Fill(4);
+        h_cutflow_2->Fill(4);
         
         h_ak80eta->Fill(p4_ak8jet0.Eta());
         h_ak80eta->SetYTitle("Events");
@@ -314,9 +327,9 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
 
         if( abs(ak8jet0->Eta)<3 &&  abs(ak8jet1->Eta)<3 ){
           ++num2;
-          h_cutflow->Fill(4);
-	  h_events->Fill(4);
-          h_cutflow_2->Fill(4);
+          h_cutflow->Fill(5);
+	  h_events->Fill(5);
+          h_cutflow_2->Fill(5);
          
           h_ak80_tau2_tau1->Fill(1.0*tau2_1/tau1_1);
           h_ak80_tau2_tau1->SetYTitle("Events");
@@ -330,9 +343,9 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
 
           if(tau2_1/tau1_1 < 0.6 && tau2_2/tau1_2 < 0.6){
             ++num4;
-            h_cutflow->Fill(5);
-	    h_events->Fill(5);
-            h_cutflow_2->Fill(5);
+            h_cutflow->Fill(6);
+	    h_events->Fill(6);
+            h_cutflow_2->Fill(6);
 	
 	    h_sdmass_ak80->Fill(p4_ak8jet0.M());
             h_sdmass_ak80->SetYTitle("Events");
@@ -348,9 +361,9 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
 	    if( p4_ak8jet0.M() > 90 && p4_ak8jet0.M() < 140 &&
               p4_ak8jet1.M() > 90 &&  p4_ak8jet1.M() < 140 ){
               ++num5;
-              h_cutflow->Fill(6);
-	      h_events->Fill(6);
-              h_cutflow_2->Fill(6);
+              h_cutflow->Fill(7);
+	      h_events->Fill(7);
+              h_cutflow_2->Fill(7);
 
 	      eta_SubJet1_fatjet1->Fill(p4_sj0_ak8jet0.Eta());
               eta_SubJet1_fatjet1->SetYTitle("Events");
@@ -402,16 +415,6 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
               NSubJet_fatjet2->SetXTitle("no. of subjets");
               NSubJet_fatjet2->SetLineWidth(3);
               
-              //#### parton mass cut ######
-              if(branchParticle->GetEntries() >= 2){
-		particle1 = (GenParticle*) branchParticle->At(0);
-		particle2 = (GenParticle*) branchParticle->At(1);
-		genJetMomentum = particle1->P4()+particle2->P4();
-                if(genJetMomentum.M() < 1000.){
-		  h_cutflow->Fill(7);
-		  h_events->Fill(7);
-		  h_cutflow_2->Fill(7);
-   		  inv_M_qq->Fill(genJetMomentum.M());
 	          
 	      //######  b-tagged jets #### 
 	      if(one_btagged == 1){
