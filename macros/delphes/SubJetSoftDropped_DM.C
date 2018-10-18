@@ -157,7 +157,7 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
   TFile* fout = new TFile(output, "RECREATE");
   fout->cd();
   TLorentzVector genJetMomentum;
-  GenParticle *particle1,*particle2,*mother1, *mother2;
+  GenParticle *particle1,*particle2,*particle3,*mother1,*mother2;
   Int_t index, motherPID_1, motherPID_2;
   // Book histograms
   TH1F *h_cutflow           = new TH1F("h_cutflow"          , "", 11, 0.5, 11.5);
@@ -231,44 +231,45 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
   h_events->GetXaxis()->SetBinLabel(10 ,"sjBTag>2");
   h_events->GetXaxis()->SetBinLabel(11 ,"sjBTag>3");
 
-  float total_events =0 ,num1 =0, num2=0, num3=0, num4=0, num5=0,num6=0,total_events_AK4=0,num7=0,num8=0,num9=0,num10=0,num11=0,w_4b=0.;
+  float total_events =0 ,num1 =0, num2=0, num3=0, num4=0, num5=0,num6=0,total_events_AK4=0,num7=0,num8=0,num9=0,num10=0,num11=0, w_4b=0., count1=0., count2=0., countqq=0;
   // Loop over all events
   for(Int_t entry = 0; entry < numberOfEntries; ++entry)
   {
     // Load selected branches with data from specified event
   treeReader->ReadEntry(entry);
-
   ++total_events;
   h_cutflow->Fill(1);
   h_events->Fill(1);
   h_cutflow_2->Fill(1);
  
   //#### parton mass cut ######
-  if(branchParticle->GetEntries() >= 2){
+//  if(branchParticle->GetEntries() >= 2){
    for(i = 0; i < branchParticle->GetEntries(); i++){
-    particle1 = (GenParticle*) branchParticle->At(i);
-    if (particle1->Status == 23){
-     for(j = i+1; j < branchParticle->GetEntries(); j++){
-     particle2 = (GenParticle*) branchParticle->At(j);
-     if(particle2->Status == 23) break;
-       }
-      }
-     if (particle1->Status == 23 && particle2->Status == 23){
-     
-     mother1 = (GenParticle*) branchParticle->At(particle1->M1);
-     motherPID_1 = mother1->PID;
-     mother2 = (GenParticle*) branchParticle->At(particle2->M1);
-     motherPID_2 = mother2->PID;
-     cout << "p1_mother==" << motherPID_1  << " and particle1== " << particle1->PID << " status1==" << particle1->Status << endl;
-     cout << "p2_mother==" << motherPID_2  << " and particle2== " << particle2->PID << " status2==" << particle2->Status << endl;
-     genJetMomentum = particle1->P4()+particle2->P4();
-     if(genJetMomentum.M() < 1000.){
-      h_cutflow->Fill(2);
-      h_events->Fill(2);
-      h_cutflow_2->Fill(2);
-      inv_M_qq->Fill(genJetMomentum.M());
-     }
-    }
+     particle1 = (GenParticle*) branchParticle->At(i);
+     if (particle1->Status != 23) continue;
+     else{
+      countqq++;
+      if(countqq==1) count1=i;
+      if(countqq==2){
+        count2=i;
+        particle2 = (GenParticle*) branchParticle->At(count1);
+        particle3 = (GenParticle*) branchParticle->At(count2);
+        countqq=0;
+        cout << "entry==" << entry << endl;
+        cout << "p1_status==" << particle1->Status << "p2_status==" << particle2->Status << endl;
+        mother1 = (GenParticle*) branchParticle->At(particle2->M1);
+        motherPID_1 = mother1->PID;
+        mother2 = (GenParticle*) branchParticle->At(particle3->M1);
+        motherPID_2 = mother2->PID;
+        cout << "p1_mother==" << motherPID_1  << " and particle1== " << particle2->PID << " status1==" << particle2->Status << endl;
+        cout << "p2_mother==" << motherPID_2  << " and particle2== " << particle3->PID << " status2==" << particle3->Status << endl;
+        genJetMomentum = particle2->P4()+particle3->P4();
+        if(genJetMomentum.M() < 1000.){
+          h_cutflow->Fill(2);
+          h_events->Fill(2);
+          h_cutflow_2->Fill(2);
+          inv_M_qq->Fill(genJetMomentum.M());
+          
     // If event contains at least 2 jets
     if(branchJetAK8->GetEntries() >= 2)
     {
@@ -484,18 +485,25 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
 		M_HH_4b->SetYTitle("Events");
 		M_HH_4b->SetXTitle("M_{HH},[GeV]");
 		M_HH_4b->SetLineWidth(3);
-                }	
-		}/// parton mass cut
-	      }//// parton loop
-            } //// AK8 jet tau21
-          } /// AK8 jet soft drop mass
-        } //// AK8 jet eta
-      } //// AK8 jet pt
-    } //// Start Higgs jet selections
+	      }	
+	    }
+	  }
+	}
+      }
+    }
+	}
+      }
+      else break;
+     }
+   }
+  
+  }     
+   
+   
+  
 
-  } //// End event loop 
+  
  
-
   TString newdir = "mkdir -p MyHistos" ;
   system(newdir);
 
@@ -553,5 +561,6 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
   fout->Write();
   fout->Close();
   cout << "total_events==" << total_events << endl;
- }  
-}
+  }  
+    }
+
