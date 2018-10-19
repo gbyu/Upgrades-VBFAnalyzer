@@ -226,12 +226,13 @@ def main():
   h_mjj_3b                     = ROOT.TH1D("h_mjj_3b"                     ,";M(jj) [GeV]; Events;"         ,400  ,500.   ,4500 )
   h_mjj_4b                     = ROOT.TH1D("h_mjj_4b"                     ,";M(jj) [GeV]; Events;"         ,400  ,500.   ,4500 )
   
-  h_mass_qq                    = ROOT.TH1D("h_mass_qq"                   ,";#hat{M}_{qq} [GeV]; Events;"	   ,400  ,1000.   ,4500 )
+  h_mass_qq                    = ROOT.TH1D("h_mass_qq"                   ,";#hat{M}_{qq} [GeV]; Events;"	   ,100  ,0.   ,5000. )
   
   h_cutflow                    = ROOT.TH1D("h_cutflow"                    ,";;Events;"                     ,10   ,0.5    ,10.5 )
       
   h_cutflow.GetXaxis().SetBinLabel(1 ,"All evts") ; 
-  h_cutflow.GetXaxis().SetBinLabel(2 ,"AK8 jets") ; 
+#  h_cutflow.GetXaxis().SetBinLabel(2 ,"AK8 jets") ; 
+  h_cutflow.GetXaxis().SetBinLabel(2 ,"M_{qq}") ;
   h_cutflow.GetXaxis().SetBinLabel(3 ,"p_{T}+#eta") ; 
   h_cutflow.GetXaxis().SetBinLabel(4 ,"#Delta#Eta(JJ)") ; 
   h_cutflow.GetXaxis().SetBinLabel(5 ,"#tau_{21}") ; 
@@ -259,7 +260,7 @@ def main():
     entries = tree.GetEntriesFast()
   
     for event in tree:
-
+      countqq=0
       if opt.maxEvts > 0 and ievt > opt.maxEvts: break
       if ievt%100 == 0: print " Processing evt %i" % ievt
                                    
@@ -271,16 +272,13 @@ def main():
       gen_phi  = event.GenParticles_genphi
       gen_mass = event.GenParticles_genmass
       gen_id = event.GenParticles_genpid
-      for i in range(len(gen_pt)):
-        if gen_id[i] == 25: 
-          h_genH_pt.Fill(gen_pt[i])
-          h_genH_eta.Fill(gen_eta[i])
-      pts = event.AK8JetsPuppi_pt
-  
-      nak8 = len(pts)
+      gen_status = event.GenParticles_genstatus
+      gen_momstatus = event.GenParticles_mom0status
   
       h_cutflow.Fill(1)
       ### Selecting at least two AK8 jets:
+<<<<<<< HEAD
+=======
       if nak8 < 2: continue
       etas   = event.AK8JetsPuppi_eta
       ptsel  = pts[0] > opt.ptak8_0_Min and pts[1] > opt.ptak8_1_Min
@@ -311,15 +309,23 @@ def main():
       p4_higgses.append(p4_ak81)
 
 #### adding partonic mass distribution #####
+>>>>>>> a389278e5e9f85f073cfde238883c3eb61d8689c
       p4_p1 = ROOT.TLorentzVector()
       p4_p2 = ROOT.TLorentzVector()
-      for i in range(0, len(gen_pt)-1):
-        for j in range(i+1, len(gen_pt)):
-          if abs(gen_eta[i]) <= 3.0 and abs(gen_eta[j]) <= 3.0:
-            p4_p1.SetPtEtaPhiM(gen_pt[i], gen_eta[i], gen_phi[i], gen_mass[i])
-            p4_p2.SetPtEtaPhiM(gen_pt[j], gen_eta[j], gen_phi[j], gen_mass[j])
-            if (p4_p1+p4_p2).M() >= 1000.:
-	      h_mass_qq.Fill((p4_p1+p4_p2).M())
+      for i in range(0, len(gen_pt)):
+        if gen_status[i] == 23:
+            countqq=countqq+1
+            if countqq == 1: count1 = i
+            elif countqq == 2: 
+		count2 = i
+                countqq = 0
+      		p4_p1.SetPtEtaPhiM(gen_pt[count1], gen_eta[count1], gen_phi[count1], gen_mass[count1])
+                p4_p2.SetPtEtaPhiM(gen_pt[count2], gen_eta[count2], gen_phi[count2], gen_mass[count2])
+                if (p4_p1+p4_p2).M() >= 1000.:
+		   h_cutflow.Fill(2)
+                   h_mass_qq.Fill((p4_p1+p4_p2).M())
+                break; 
+
   fout.cd()
   
   h_cutflow_eff = h_cutflow.Clone("h_cutflow_eff")
