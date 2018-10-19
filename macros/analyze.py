@@ -277,8 +277,6 @@ def main():
   
       h_cutflow.Fill(1)
       ### Selecting at least two AK8 jets:
-<<<<<<< HEAD
-=======
       if nak8 < 2: continue
       etas   = event.AK8JetsPuppi_eta
       ptsel  = pts[0] > opt.ptak8_0_Min and pts[1] > opt.ptak8_1_Min
@@ -309,7 +307,6 @@ def main():
       p4_higgses.append(p4_ak81)
 
 #### adding partonic mass distribution #####
->>>>>>> a389278e5e9f85f073cfde238883c3eb61d8689c
       p4_p1 = ROOT.TLorentzVector()
       p4_p2 = ROOT.TLorentzVector()
       for i in range(0, len(gen_pt)):
