@@ -276,35 +276,6 @@ def main():
       gen_momstatus = event.GenParticles_mom0status
   
       h_cutflow.Fill(1)
-      ### Selecting at least two AK8 jets:
-      if nak8 < 2: continue
-      etas   = event.AK8JetsPuppi_eta
-      ptsel  = pts[0] > opt.ptak8_0_Min and pts[1] > opt.ptak8_1_Min
-
-      etasel = abs(etas[0]) < opt.etaak8_0_Max and abs(etas[1]) < opt.etaak8_1_Max
-      detasel = abs(etas[0] - etas[1]) < opt.detaak8Max
-
-      tau1s           = event.AK8JetsPuppi_tau1Puppi
-      tau2s           = event.AK8JetsPuppi_tau2Puppi
-  
-      tau21sel = tau2s[0]/tau1s[0] < opt.t21_0_Max and tau2s[1]/tau1s[1] < opt.t21_1_Max
-  
-      sd_masses       = event.AK8JetsPuppi_softDropMassPuppi 
-
-  
-      msdsel     = opt.msd_0_Min < sd_masses[0] < opt.msd_0_Max and opt.msd_1_Min < sd_masses[1] < opt.msd_1_Max
-      #### Store Higgs cand p4 for future use
-
-      phis            = event.AK8JetsPuppi_phi
-      masses          = event.AK8JetsPuppi_mass
-  
-      p4_higgses= []
-      p4_ak80 = ROOT.TLorentzVector()
-      p4_ak81 = ROOT.TLorentzVector()
-      p4_ak80.SetPtEtaPhiM(pts[0], etas[0], phis[0], masses[0])
-      p4_ak81.SetPtEtaPhiM(pts[1], etas[1], phis[1], masses[1])
-      p4_higgses.append(p4_ak80)
-      p4_higgses.append(p4_ak81)
 
 #### adding partonic mass distribution #####
       p4_p1 = ROOT.TLorentzVector()
@@ -318,9 +289,8 @@ def main():
                 countqq = 0
       		p4_p1.SetPtEtaPhiM(gen_pt[count1], gen_eta[count1], gen_phi[count1], gen_mass[count1])
                 p4_p2.SetPtEtaPhiM(gen_pt[count2], gen_eta[count2], gen_phi[count2], gen_mass[count2])
-                if (p4_p1+p4_p2).M() >= 1000.:
-		   h_cutflow.Fill(2)
-                   h_mass_qq.Fill((p4_p1+p4_p2).M())
+                h_cutflow.Fill(2)
+                h_mass_qq.Fill((p4_p1+p4_p2).M())
                 break; 
 
   fout.cd()
