@@ -136,7 +136,7 @@ bool isBTagged(const double pt, const double eta, const int pu, const int fl) {
 
 //------------------------------------------------------------------------------
 
-void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const char *output)
+void SubJetSoftDropped_test(const int pu, const int nmin, const int nmax, const char *output)
 {
   gSystem->Load("libDelphes");
   
@@ -493,14 +493,13 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
 	  }
 	}
       }
-    }
-	//}
+}	//}
      break;    
-       }
+     }
+}      
      }
    }
-  }    
-   
+  }   
    
   
 
