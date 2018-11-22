@@ -237,7 +237,7 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
   float total_events =0 ,num1 =0, num2=0, num3=0, num4=0, num5=0,num6=0,total_events_AK4=0,num7=0,num8=0,num9=0,num10=0,num11=0, w_4b=0., count1=0., count2=0., count3=0., count4=0., countqq=0, HT=0, flv1=0,flv2=0,flv3=0,flv4=0 ;
   // Loop over all events
   //for(Int_t entry = 0; entry < numberOfEntries; ++entry)
-  for(Int_t entry = 0; entry < 10000; ++entry)
+  for(Int_t entry = 0; entry < 20000; ++entry)
   {
     // Load selected branches with data from specified event
   treeReader->ReadEntry(entry);
@@ -257,25 +257,13 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
        }	
       else if(countqq==2){
         count2=i;
-      }
-      else if(countqq==3){
-        count3=i;
-      }
-      else if(countqq==4){
-        count4=i;
         particle2 = (GenParticle*) branchParticle->At(count1);
         particle3 = (GenParticle*) branchParticle->At(count2);
-	particle4 = (GenParticle*) branchParticle->At(count3);
-        particle5 = (GenParticle*) branchParticle->At(count4);
         countqq=0;
         mother1 = (GenParticle*) branchParticle->At(particle2->M1);
         motherPID_1 = mother1->PID;
         mother2 = (GenParticle*) branchParticle->At(particle3->M1);
         motherPID_2 = mother2->PID;
-        p40_gen = particle2->P4();
-        p41_gen = particle3->P4();
-	p42_gen = particle4->P4();
-	p43_gen = particle5->P4();
         genJetMomentum = particle2->P4()+particle3->P4();
         inv_M_qq->Fill(genJetMomentum.M());
         if(genJetMomentum.M() < 1000.){
@@ -311,29 +299,26 @@ void SubJetSoftDropped_DM(const int pu, const int nmin, const int nmax, const ch
       float tau2_2(ak8jet1->Tau[1]);
       
       //// Jet-particle Delta-R matching
-      ///// For subjet_1 from Ak8_1
-      if((p4_sj0_ak8jet0.DeltaR(p40_gen) < 0.4 && particle2->PID == 5) || (p4_sj0_ak8jet0.DeltaR(p41_gen) < 0.4 && particle3->PID == 5) || (p4_sj0_ak8jet0.DeltaR(p42_gen) < 0.4 && particle4->PID == 5) || (p4_sj0_ak8jet0.DeltaR(p43_gen) < 0.4 && particle5->PID == 5)) flv1 = 5;
-      else if((p4_sj0_ak8jet0.DeltaR(p40_gen) < 0.4 && particle2->PID == 4) || (p4_sj0_ak8jet0.DeltaR(p41_gen) < 0.4 && particle3->PID == 4) || (p4_sj0_ak8jet0.DeltaR(p42_gen) < 0.4 && particle4->PID == 4) || (p4_sj0_ak8jet0.DeltaR(p43_gen) < 0.4 && particle5->PID == 4)) flv1 = 4;
-      else flv1 = 0;
-     
-      ///// For subjet_2 from Ak8_1     
-      if((p4_sj1_ak8jet0.DeltaR(p40_gen) < 0.4 && particle2->PID == 5) || (p4_sj1_ak8jet0.DeltaR(p41_gen) < 0.4 && particle3->PID == 5) || (p4_sj1_ak8jet0.DeltaR(p42_gen) < 0.4 && particle4->PID == 5) || (p4_sj1_ak8jet0.DeltaR(p43_gen) < 0.4 && particle5->PID == 5)) flv2 = 5;
-      else if((p4_sj1_ak8jet0.DeltaR(p40_gen) < 0.4 && particle2->PID == 4) || (p4_sj1_ak8jet0.DeltaR(p41_gen) < 0.4 && particle3->PID == 4) || (p4_sj1_ak8jet0.DeltaR(p42_gen) < 0.4 && particle4->PID == 4) || (p4_sj1_ak8jet0.DeltaR(p43_gen) < 0.4 && particle5->PID == 4)) flv2 = 4;
-      else flv2= 0;
-
-      ///// For subjet_1 from Ak8_2   
-      if((p4_sj0_ak8jet1.DeltaR(p40_gen) < 0.4 && particle2->PID == 5) || (p4_sj0_ak8jet1.DeltaR(p41_gen) < 0.4 && particle3->PID == 5) || (p4_sj0_ak8jet1.DeltaR(p42_gen) < 0.4 && particle4->PID == 5) || (p4_sj0_ak8jet1.DeltaR(p43_gen) < 0.4 && particle5->PID == 5)) flv3 = 5;
-      else if((p4_sj0_ak8jet1.DeltaR(p40_gen) < 0.4 && particle2->PID == 4) || (p4_sj0_ak8jet1.DeltaR(p41_gen) < 0.4 && particle3->PID == 4) || (p4_sj0_ak8jet1.DeltaR(p42_gen) < 0.4 && particle4->PID == 4) || (p4_sj0_ak8jet1.DeltaR(p43_gen) < 0.4 && particle5->PID == 4)) flv3 = 4;
-      else flv3 = 0;
-
-      ///// For subjet_2 from Ak8_2   
-      if((p4_sj1_ak8jet1.DeltaR(p40_gen) < 0.4 && particle2->PID == 5) || (p4_sj1_ak8jet1.DeltaR(p41_gen) < 0.4 && particle3->PID == 5) || (p4_sj1_ak8jet1.DeltaR(p42_gen) < 0.4 && particle4->PID == 5) || (p4_sj1_ak8jet1.DeltaR(p43_gen) < 0.4 && particle5->PID == 5)) flv4 = 5;
-      else if((p4_sj1_ak8jet1.DeltaR(p40_gen) < 0.4 && particle2->PID == 4) || (p4_sj1_ak8jet1.DeltaR(p41_gen) < 0.4 && particle3->PID == 4) || (p4_sj1_ak8jet1.DeltaR(p42_gen) < 0.4 && particle4->PID == 4) || (p4_sj1_ak8jet1.DeltaR(p43_gen) < 0.4 && particle5->PID == 4)) flv4 = 4;
-      else flv4= 0; 
-
-      
-
-      cout << "flav1 = "<< flv1 << "flav2 = "<< flv2 << "flav3 = "<< flv3 << "flav4 = "<< flv4 << endl;
+      for(j = 0; j < branchParticle->GetEntries(); j++){
+        particle3 = (GenParticle*) branchParticle->At(j);
+        if((particle3->PID/100)%10 == 5 || (particle3->PID/1000)%10 == 5){ 
+          cout << "test1..." << endl;  
+          cout << particle3->PID << endl;   
+	  cout << (particle3->PID/100)%10 << endl;
+	  if(p4_sj0_ak8jet0.DeltaR(particle3->P4()) < 0.4) {flv1 = 5; break;}
+          else if(p4_sj1_ak8jet0.DeltaR(particle3->P4()) < 0.4) {flv2 = 5; break;}
+	  else if(p4_sj0_ak8jet1.DeltaR(particle3->P4()) < 0.4) {flv3 = 5; break;}
+	  else if(p4_sj1_ak8jet1.DeltaR(particle3->P4()) < 0.4) {flv4 = 5; break;}          
+         }
+          if((particle3->PID/100)%10 == 4 || (particle3->PID/1000)%10 == 4){
+          cout << "test2..." <<	endl;
+	  if(p4_sj0_ak8jet0.DeltaR(particle3->P4()) < 0.4) {flv1 = 4; break;}
+	  else if(p4_sj1_ak8jet0.DeltaR(particle3->P4()) < 0.4) {flv2 = 4; break;}
+          else if(p4_sj0_ak8jet1.DeltaR(particle3->P4()) < 0.4) {flv3 = 4; break;}
+          else if(p4_sj1_ak8jet1.DeltaR(particle3->P4()) < 0.4) {flv4 = 4; break;}
+	}
+      }
+     // cout << "flav1 = "<< flv1 << "flav2 = "<< flv2 << "flav3 = "<< flv3 << "flav4 = "<< flv4 << endl;
       int sj00BTagged =  int(isBTagged(p4_sj0_ak8jet0.Pt(), p4_sj0_ak8jet0.Eta(), pu, flv1));
       int sj10BTagged =  int(isBTagged(p4_sj1_ak8jet0.Pt(), p4_sj1_ak8jet0.Eta(), pu, flv2));
       int sj01BTagged =  int(isBTagged(p4_sj0_ak8jet1.Pt(), p4_sj0_ak8jet1.Eta(), pu, flv3));
